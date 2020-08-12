@@ -2,6 +2,9 @@
 #include "Camera.hpp"
 
 
+float deltaTime = 0.0f;	// Time between current frame and last frame
+float lastFrame = 0.0f; // Time of last frame
+
 Renderer::Renderer(int x, int y)
 {
 
@@ -19,6 +22,59 @@ Renderer::~Renderer()
 {
 }
 
+
+void processInput(GLFWwindow* window, Camera& cam)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, true);
+	}
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		//printf("W");
+		cam.keyboardInput(Direction::FORWARD, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		//printf("S");
+		cam.keyboardInput(Direction::BACKWARD, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		//printf("A");
+		cam.keyboardInput(Direction::LEFT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		//printf("D");
+		cam.keyboardInput(Direction::RIGHT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+	{
+		//printf("D");
+		cam.keyboardInput(Direction::DOWN, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		//printf("D");
+		cam.keyboardInput(Direction::UP, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		//printf("E");
+		cam.keyboardInput(Direction::YAW_RIGHT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		//printf("Q");
+		cam.keyboardInput(Direction::YAW_LEFT, deltaTime);
+	}
+}
+
+void Renderer::addModel(string path)
+{
+	models.push_back(Model((char*)path.c_str()));
+}
 void frameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -57,8 +113,32 @@ bool Renderer::initialize()
 	glEnable(GL_FRAMEBUFFER_SRGB);
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
-
-	
-
 	return true;
+}
+void Renderer::run()
+{
+	while (!glfwWindowShouldClose(window))
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
+
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		processInput(window, cam);
+
+		mat4 view = cam.getView();
+		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
+		shader.setMatFour("view", view);
+		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
+		shader.setMatFour("projection", projection);
+
+		for (Model m : models)
+		{
+			m.draw(shader);
+		}
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
 }

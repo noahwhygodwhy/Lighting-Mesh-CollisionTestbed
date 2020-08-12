@@ -15,7 +15,7 @@ public:
 	Model(char* path);
 	~Model();
 
-	void Draw(Shader& shader);
+	void draw(Shader& shader);
 private:
 	vector<Mesh> meshes;
 	string directory;

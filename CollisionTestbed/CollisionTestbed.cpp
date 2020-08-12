@@ -9,5 +9,7 @@ int main(void)
 	Renderer r = Renderer(1960, 1080);
 	printf("###initializing\n");
 	r.initialize();
+	r.addModel("C:\\Users\\noahm\\source\\repos\\CollisionTestbed\\CollisionTestbed\\survival backpack\\Survival_BackPack_2.fbx");
+	r.run();
 	printf("###ending\n");
 }

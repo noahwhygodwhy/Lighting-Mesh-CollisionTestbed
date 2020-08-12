@@ -22,13 +22,14 @@ struct Vertex {
 struct Texture {
 	unsigned int id;
 	string type;
+	//aiString path;
 };
 
 class Mesh
 {
 public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-	void Draw(Shader& shader);
+	void draw(Shader& shader);
 	~Mesh();
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;

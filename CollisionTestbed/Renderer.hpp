@@ -4,7 +4,9 @@
 
 #include "Camera.hpp"
 #include "Shader.hpp"
-
+#include <vector>
+#include "Model.h"
+#include "Mesh.hpp"
 
 #include "glad.h"
 #include <GLFW/glfw3.h>
@@ -15,8 +17,10 @@ public:
 	Renderer(int x, int  y);
 	~Renderer();
 	bool initialize();
+	void run();
+	void addModel(string path);
 private:
-
+	vector<Model> models;
 	unsigned int largeTextureStack = 0;
 	int screenX;
 	int screenY;

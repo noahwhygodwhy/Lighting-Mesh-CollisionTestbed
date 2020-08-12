@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Survival Backpack">
+      <UniqueIdentifier>{d8973984-ea06-4552-bf22-51cd73351a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionTestbed.cpp">
@@ -68,6 +71,9 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertShader.glsl">
@@ -77,5 +83,25 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="survival backpack\Survival_BackPack_2.fbx">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="survival backpack\1001_AO.jpg">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </Image>
+    <Image Include="survival backpack\1001_metallic.jpg">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </Image>
+    <Image Include="survival backpack\1001_normal.png">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </Image>
+    <Image Include="survival backpack\1001_roughness.jpg">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </Image>
+    <Image Include="survival backpack\1001_albedo.jpg">
+      <Filter>Resource Files\Survival Backpack</Filter>
+    </Image>
   </ItemGroup>
 </Project>

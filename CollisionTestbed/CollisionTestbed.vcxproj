@@ -163,11 +163,20 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragShader.glsl" />
     <None Include="packages.config" />
+    <None Include="survival backpack\Survival_BackPack_2.fbx" />
     <None Include="vertShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="survival backpack\1001_albedo.jpg" />
+    <Image Include="survival backpack\1001_AO.jpg" />
+    <Image Include="survival backpack\1001_metallic.jpg" />
+    <Image Include="survival backpack\1001_normal.png" />
+    <Image Include="survival backpack\1001_roughness.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
