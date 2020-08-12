@@ -149,6 +149,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLSLReader.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="GLSLReader.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="Mesh.hpp" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
   </ItemGroup>
