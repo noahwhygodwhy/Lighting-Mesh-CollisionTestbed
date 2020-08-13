@@ -142,6 +142,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\External Libraries\assimp\lib;C:\Users\noahm\source\repos\CollisionTestbed\External Libraries\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(ProjectDir)..\External Libraries\assimp\lib\assimp-vc142-mtd.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
