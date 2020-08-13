@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef MODEL_H
+#define MODEL_H
+
 #include <vector>
 #include "Shader.hpp"
 #include "Mesh.hpp"
@@ -24,3 +27,5 @@ private:
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 };
+
+#endif // !MODEL_H

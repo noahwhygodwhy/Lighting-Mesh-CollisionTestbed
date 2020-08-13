@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Model.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Model::Model(char* path)
@@ -122,7 +124,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 	
-	for (size_t i; i < mesh->mNumVertices; i++)
+	for (size_t i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex v;
 		v.position = vec3(mesh->mVertices[0].x, mesh->mVertices[0].y, mesh->mVertices[0].z);

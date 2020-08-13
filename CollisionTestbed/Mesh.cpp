@@ -1,9 +1,20 @@
-#pragma once
 
 #include "Mesh.hpp"
 
 using namespace std;
 using namespace glm;
+
+
+Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
+{
+    this->vertices = vertices;
+    this->indices = indices;
+    this->textures = textures;
+}
+
+Mesh::~Mesh()
+{
+}
 
 void Mesh::setupMesh()
 {

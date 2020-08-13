@@ -1,5 +1,9 @@
 #pragma once
 
+
+#ifndef MESH_H
+#define MESH_H
+
 #include <vector>
 #include <string>
 #include "glm/glm.hpp"
@@ -40,13 +44,5 @@ private:
 	void setupMesh();
 };
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
-{
-	this->vertices = vertices;
-	this->indices = indices;
-	this->textures = textures;
-}
 
-Mesh::~Mesh()
-{
-}
+#endif
