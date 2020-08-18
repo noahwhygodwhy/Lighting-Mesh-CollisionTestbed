@@ -126,7 +126,10 @@ void Renderer::run()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
+
+
 		processInput(window, cam);
+		shader.use();
 
 		mat4 view = cam.getView();
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
@@ -134,6 +137,7 @@ void Renderer::run()
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
 		shader.setMatFour("projection", projection);
 
+		int i = 0;
 		for (Model m : models)
 		{
 			m.draw(shader);
@@ -141,4 +145,5 @@ void Renderer::run()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+	glfwTerminate();
 }

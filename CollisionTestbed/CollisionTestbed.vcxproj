@@ -155,6 +155,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Thing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
@@ -163,10 +164,11 @@
     <ClInclude Include="GLSLReader.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="Mesh.hpp" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="Model.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Thing.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragShader.glsl" />

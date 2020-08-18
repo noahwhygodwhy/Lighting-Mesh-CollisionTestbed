@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Model.h"
+#include "Model.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Model::Model(char* path)
 {
+	stbi_set_flip_vertically_on_load(true);
 	loadModel(path);
 }
 
@@ -29,8 +30,10 @@ void Model::loadModel(string path)
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		cout << "ERROR IN ASSIMP, MODEL.CPP LoadModel()\n" << import.GetErrorString() << endl;
+		exit(-1);
 	}
 	directory = path.substr(0, path.find_last_of('/'));
+
 	processNode(scene->mRootNode, scene);
 }
 
@@ -53,7 +56,6 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 unsigned int TextureFromFile(const char* fileName, const string directory)
 {
 
-
 	string path = string(fileName);
 	path = directory + '/' + fileName;
 
@@ -72,13 +74,17 @@ unsigned int TextureFromFile(const char* fileName, const string directory)
 		case 1:
 			format = GL_RED;
 			break;
-		case 2:
+		case 3:
 			format = GL_RGB;
 			break;
 		case 4: 
 			format = GL_RGBA;
 			break;
+		default:
+			printf("DEFAULT? WHAT THE FUCK IS GOING ON?\n\n\n\n\n\n\n\n\n");
+			break;
 		}
+		
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, initImage);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -94,7 +100,7 @@ unsigned int TextureFromFile(const char* fileName, const string directory)
 	else
 	{
 		fprintf(stderr, "image not loaded\n");
-		fprintf(stderr, "%s\n", fileName);
+		fprintf(stderr, "%s\n", path.c_str());
 		stbi_image_free(initImage);
 		exit(-1);
 	}
@@ -108,11 +114,26 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-		Texture texture;
-		texture.id = TextureFromFile(str.C_Str(), directory);
-		texture.type = typeName;
-		//texture.path = str;
-		textures.push_back(texture);
+		bool skip = false;
+
+		for (size_t j = 0; j < loadedTextures.size(); j++)
+		{
+			if (strcmp(loadedTextures[j].path.data(), str.C_Str()) == 0)
+			{
+				textures.push_back(loadedTextures[j]);
+				skip = true;
+				break;
+			}
+		}
+		if (!skip)
+		{
+			Texture texture;
+			texture.id = TextureFromFile(str.C_Str(), directory);
+			texture.type = typeName;
+			texture.path = str.C_Str();
+			textures.push_back(texture);
+			loadedTextures.push_back(texture);
+		}
 	}
 	return textures;
 }
@@ -127,8 +148,9 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	for (size_t i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex v;
-		v.position = vec3(mesh->mVertices[0].x, mesh->mVertices[0].y, mesh->mVertices[0].z);
-		v.normal = vec3(mesh->mNormals[0].x, mesh->mNormals[0].y, mesh->mNormals[0].z);
+		v.position = vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
+		//printf("vertex:\t %f\t %f\t %f\t", v.position.x, v.position.y, v.position.z);
+		v.normal = vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 		if (mesh->mTextureCoords[0])
 		{
 			v.texCoords = vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
@@ -137,6 +159,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		{
 			v.texCoords = vec2(0.0f, 0.0f);
 		}
+		//printf("uvs:\t %f\t %f\n", v.texCoords.x, v.texCoords.y);
 		vertices.push_back(v);
 	}
 	for (size_t i = 0; i < mesh->mNumFaces; i++)//for each face

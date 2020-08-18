@@ -42,6 +42,9 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Thing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.hpp">
@@ -68,10 +71,13 @@
     <ClInclude Include="Mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stb_image.h">
+    <ClInclude Include="Model.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thing.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

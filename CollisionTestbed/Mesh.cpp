@@ -10,6 +10,8 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
     this->vertices = vertices;
     this->indices = indices;
     this->textures = textures;
+
+    setupMesh();
 }
 
 Mesh::~Mesh()
@@ -18,9 +20,12 @@ Mesh::~Mesh()
 
 void Mesh::setupMesh()
 {
+    //printf("setting up mesh");
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
+
+    //printf("there are %i indices and %i vertices\n", indices.size(), vertices.size());
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -46,10 +51,14 @@ void Mesh::setupMesh()
 
 void Mesh::draw(Shader& shader)
 {
+
+
+
     unsigned int diffuseNum = 1;
     unsigned int specularNum = 1;
     unsigned int normalNum = 1;
     unsigned int heightNum = 1;
+    //printf("There are %i textures\n", textures.size());
     for (unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i);//i love that this works
@@ -72,14 +81,21 @@ void Mesh::draw(Shader& shader)
         {
             number = to_string(heightNum++);
         }
-        shader.setFloat(("material." + name + number).c_str(), i);
+        else
+        {
+            printf("ERROR IN DRAW(), NO TEXTURE TYPE");
+            exit(-1);
+        }
+
+        shader.setInt(("material." + name + number).c_str(), i);
+
+        glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
 
     }
-
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
-    glActiveTexture(GL_TEXTURE0);
+    //glActiveTexture(GL_TEXTURE0);
 }

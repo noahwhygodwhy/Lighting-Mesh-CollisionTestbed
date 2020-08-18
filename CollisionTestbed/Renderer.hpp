@@ -5,7 +5,7 @@
 #include "Camera.hpp"
 #include "Shader.hpp"
 #include <vector>
-#include "Model.h"
+#include "Model.hpp"
 #include "Mesh.hpp"
 
 #include "glad.h"
