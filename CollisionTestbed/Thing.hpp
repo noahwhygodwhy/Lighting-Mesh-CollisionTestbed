@@ -13,22 +13,12 @@ class Thing
 public:
 	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orentation = vec3(0, 0, 0));
 	~Thing();
-
+	void tick(float deltaTime);
+	//void impart force(..?);
 private:
 	vec3 position;
 	vec3 orientation; //TODO: maybe figure out quaternions...
 	vec3 velocity;
+	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
-
-Thing::Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orentation = vec3(0, 0, 0))
-{//WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-	this->model = m;
-	this->position = position;
-	this->velocity = velocity;
-	this->orientation = orientation;
-}
-
-Thing::~Thing()
-{
-}

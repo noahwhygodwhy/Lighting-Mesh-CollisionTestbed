@@ -15,6 +15,7 @@ using namespace std;
 class Model
 {
 public:
+	Model();
 	Model(char* path);
 	~Model();
 	void draw(Shader& shader);

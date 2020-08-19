@@ -5,6 +5,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+
+//NEVER USE
+Model::Model()
+{
+	//TODO: load a default model to indicate errors?
+}
+
 Model::Model(char* path)
 {
 	stbi_set_flip_vertically_on_load(true);
