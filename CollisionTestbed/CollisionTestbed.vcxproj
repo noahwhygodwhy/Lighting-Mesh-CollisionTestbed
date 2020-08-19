@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionTestbed.cpp" />
+    <ClCompile Include="Environment.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLSLReader.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="DirectionEnum.h" />
+    <ClInclude Include="Environment.hpp" />
     <ClInclude Include="glad.h" />
     <ClInclude Include="GLSLReader.h" />
     <ClInclude Include="khrplatform.h" />
