@@ -22,6 +22,18 @@
     <Filter Include="Source Files\OGLS">
       <UniqueIdentifier>{dc84b751-c0e8-4bf9-b841-5f41920fa273}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{dc7464f5-198c-4b54-b1bf-b6373cf2dc5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{67494efe-5512-4b13-9b22-c40ee0a0f053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OGLS">
+      <UniqueIdentifier>{2df7ec6c-46ce-4033-bbca-8d1b8b81875c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Things">
+      <UniqueIdentifier>{3490eaef-b17f-4678-8e8c-f1957ad3061b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionTestbed.cpp">
@@ -62,47 +74,47 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Renderer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="glad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectionEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="khrplatform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GLSLReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Model.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Thing.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Agent.hpp">
+      <Filter>Header Files\Things</Filter>
     </ClInclude>
     <ClInclude Include="Environment.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Things</Filter>
     </ClInclude>
     <ClInclude Include="Object.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Things</Filter>
     </ClInclude>
-    <ClInclude Include="Agent.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Thing.hpp">
+      <Filter>Header Files\Things</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionEnum.h">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="glad.h">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLReader.h">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="khrplatform.h">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.hpp">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.hpp">
+      <Filter>Header Files\OGLS</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
