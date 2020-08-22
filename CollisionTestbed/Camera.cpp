@@ -50,7 +50,7 @@ void Camera::keyboardInput(Direction dir, float time)
 	}
 	updateVectors();
 	////printf("new position: ");
-	//printVecThree(position);	
+	//printVecThree(position);
 }
 void Camera::mouseInput(float x, float y, GLboolean cp = GL_TRUE)
 {

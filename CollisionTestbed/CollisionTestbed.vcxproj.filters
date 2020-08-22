@@ -16,24 +16,15 @@
     <Filter Include="Resource Files\Survival Backpack">
       <UniqueIdentifier>{d8973984-ea06-4552-bf22-51cd73351a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Things">
+      <UniqueIdentifier>{a349b60c-2763-43d9-9c9a-9d4e50effb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OGLS">
+      <UniqueIdentifier>{dc84b751-c0e8-4bf9-b841-5f41920fa273}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionTestbed.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GLSLReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
@@ -42,11 +33,32 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Thing.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files\Things</Filter>
     </ClCompile>
     <ClCompile Include="Environment.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Things</Filter>
+    </ClCompile>
+    <ClCompile Include="Thing.cpp">
+      <Filter>Source Files\Things</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Things</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\OGLS</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLReader.cpp">
+      <Filter>Source Files\OGLS</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\OGLS</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\OGLS</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files\OGLS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,17 +98,23 @@
     <ClInclude Include="Environment.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Object.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertShader.glsl">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="fragShader.glsl">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="packages.config" />
     <None Include="survival backpack\Survival_BackPack_2.fbx">
       <Filter>Resource Files\Survival Backpack</Filter>
+    </None>
+    <None Include="vertShader.glsl">
+      <Filter>Source Files\OGLS</Filter>
+    </None>
+    <None Include="fragShader.glsl">
+      <Filter>Source Files\OGLS</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
