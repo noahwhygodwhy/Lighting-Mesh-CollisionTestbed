@@ -3,7 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Model.hpp"
-
+#include <string>
 
 using namespace std;
 using namespace glm;
@@ -12,6 +12,7 @@ class Thing
 {
 public:
 	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
+	Thing(string path, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
 	~Thing();
 	void tick(float deltaTime);
 	void impartForce(vec3 direction, float magnitude);

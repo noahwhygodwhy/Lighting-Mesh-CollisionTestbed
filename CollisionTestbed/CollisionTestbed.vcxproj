@@ -150,12 +150,15 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionTestbed.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLSLReader.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Thing.cpp" />
@@ -163,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="Agent.hpp" />
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Controller.hpp" />
     <ClInclude Include="DirectionEnum.h" />
     <ClInclude Include="Environment.hpp" />
     <ClInclude Include="glad.h" />
@@ -171,6 +175,8 @@
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
     <ClInclude Include="Object.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PlayerController.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="stb_image.h" />

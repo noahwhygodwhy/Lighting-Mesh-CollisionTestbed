@@ -12,7 +12,7 @@ Model::Model()
 	//TODO: load a default model to indicate errors?
 }
 
-Model::Model(char* path)
+Model::Model(const char* path)
 {
 	stbi_set_flip_vertically_on_load(true);
 	loadModel(path);

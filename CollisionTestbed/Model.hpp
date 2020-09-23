@@ -16,7 +16,7 @@ class Model
 {
 public:
 	Model();
-	Model(char* path);
+	Model(const char* path);
 	~Model();
 	void draw(Shader& shader);
 private:

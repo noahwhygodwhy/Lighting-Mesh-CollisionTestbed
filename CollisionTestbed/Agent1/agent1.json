@@ -1,0 +1,29 @@
+{
+	"agent1": { 
+		"model": "agent1.obj",
+		"positionOffset": {
+		"x":0.0,
+		"y":0.0,
+		"z":0.0
+		},
+		"gunPort":
+		{
+			"positionOffset": {
+			"x":-1.55,
+			"y":7.45,
+			"z":3.014
+			},
+			"aimVector": {
+			"x":0.0,
+			"y":0.0,
+			"z":1.0
+			},
+		},
+		"hitbox":
+		{
+			"type":"basic_cylinder",
+			"radius":2,
+			"height":8.85
+		}
+	}
+}

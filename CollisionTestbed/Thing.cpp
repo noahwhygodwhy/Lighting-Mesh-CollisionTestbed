@@ -1,6 +1,7 @@
 #include "Thing.hpp"
+#include "Model.hpp"
 
-Thing::Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0))
+Thing::Thing(Model m, vec3 position, vec3 velocity, vec3 orientation)
 {
 	this->model = m;
 	this->position = position;
@@ -8,6 +9,13 @@ Thing::Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 
 	this->orientation = orientation;
 }
 
+Thing::Thing(string path, vec3 position, vec3 velocity, vec3 orientation)
+{
+	this->model = Model(path.c_str());
+	this->position = position;
+	this->velocity = velocity;
+	this->orientation = orientation;
+}
 Thing::~Thing()
 {
 }
