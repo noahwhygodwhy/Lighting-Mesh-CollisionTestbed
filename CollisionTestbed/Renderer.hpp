@@ -7,9 +7,10 @@
 #include <vector>
 #include "Model.hpp"
 #include "Mesh.hpp"
-
+#include "Thing.hpp"
 #include "glad.h"
 #include <GLFW/glfw3.h>
+#include "Player.hpp"
 
 class Renderer
 {
@@ -18,9 +19,11 @@ public:
 	~Renderer();
 	bool initialize();
 	void run();
-	void addModel(string path);
+	void addThing(Thing th);
+	void addPlayer(Player p);
 private:
-	vector<Model> models;
+	Player player;
+	vector<Thing> things;
 	unsigned int largeTextureStack = 0;
 	int screenX;
 	int screenY;
@@ -33,4 +36,4 @@ private:
 
 
 
-#endif // !RENDERER_H
+#endif

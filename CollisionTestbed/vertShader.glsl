@@ -6,6 +6,7 @@ layout (location = 2) in vec2 aUV;
 
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat4 transform;
 
 out vec2 texCoords;
 out vec3 coords;
@@ -14,6 +15,6 @@ void main()
 
     coords = aPos;
     texCoords = aUV;
-    gl_Position = projection*view*vec4(aPos, 1.0);
+    gl_Position = projection*view*transform*vec4(aPos, 1.0);
 }
 

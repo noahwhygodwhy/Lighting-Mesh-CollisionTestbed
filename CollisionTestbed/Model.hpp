@@ -18,7 +18,7 @@ public:
 	Model();
 	Model(const char* path);
 	~Model();
-	void draw(Shader& shader);
+	void draw(Shader& shader, glm::mat4 transform);
 private:
 	vector<Texture> loadedTextures;
 	vector<Mesh> meshes;

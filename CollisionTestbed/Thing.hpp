@@ -1,3 +1,5 @@
+#ifndef THING_H
+#define THING_H
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,6 +17,10 @@ public:
 	Thing(string path, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
 	~Thing();
 	void tick(float deltaTime);
+	void draw(Shader shader);
+
+	
+
 	void impartForce(vec3 direction, float magnitude);
 	void impartSpin(vec3 axis, float magnitude);
 	void moveRelative(vec3 shift);
@@ -25,11 +31,13 @@ public:
 
 	//void impart force(..?);
 private:
-	vec3 position;
-	vec3 orientation; //TODO: maybe figure out quaternions...
+	mat4 transform;
+	//vec3 position;
+	//vec3 orientation; //TODO: maybe figure out quaternions...
 	vec3 velocity;
 	vec3 spinAxis;
 	float spinRate;
 	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
+#endif

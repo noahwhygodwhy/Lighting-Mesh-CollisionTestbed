@@ -5,9 +5,11 @@
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
 
+
+//TODO: you were moving the camera from the renderer to the Player
+
 Renderer::Renderer(int x, int y)
 {
-
 	layerCount = 0;
 	EBO = 0;
 	VBO = 0;
@@ -71,9 +73,14 @@ void processInput(GLFWwindow* window, Camera& cam)
 	}
 }
 
-void Renderer::addModel(string path)
+void Renderer::addPlayer(Player p)
 {
-	models.push_back(Model((char*)path.c_str()));
+	this->player = p;
+}
+
+void Renderer::addThing(Thing th)
+{
+	things.push_back(th);
 }
 void frameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
@@ -138,9 +145,10 @@ void Renderer::run()
 		shader.setMatFour("projection", projection);
 
 		int i = 0;
-		for (Model m : models)
+		for (Thing t : things)
 		{
-			m.draw(shader);
+			t.tick(deltaTime);
+			t.draw(shader);
 		}
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -22,11 +22,11 @@ Model::~Model()
 {
 }
 
-void Model::draw(Shader& shader)
+void Model::draw(Shader& shader, glm::mat4 transform)
 {
 	for (size_t i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].draw(shader);
+		meshes[i].draw(shader, transform);
 	}
 }
 

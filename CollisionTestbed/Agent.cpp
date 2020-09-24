@@ -14,3 +14,8 @@ Agent::Agent(string path, Controller c, vec3 position, vec3 velocity, vec3 orien
 Agent::~Agent()
 {
 }
+
+Controller Agent::getController()
+{
+	return this->controller;
+}

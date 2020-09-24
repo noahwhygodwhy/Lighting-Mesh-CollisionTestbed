@@ -33,7 +33,7 @@ class Mesh
 {
 public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-	void draw(Shader& shader);
+	void draw(Shader& shader, glm::mat4 transform);
 	~Mesh();
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
