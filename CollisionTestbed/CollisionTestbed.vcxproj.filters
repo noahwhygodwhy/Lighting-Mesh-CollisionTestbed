@@ -34,6 +34,9 @@
     <Filter Include="Header Files\Things">
       <UniqueIdentifier>{3490eaef-b17f-4678-8e8c-f1957ad3061b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\agent1">
+      <UniqueIdentifier>{329e45cf-fa39-4b13-b130-f1747eb291a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionTestbed.cpp">
@@ -137,31 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="survival backpack\Survival_BackPack_2.fbx">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </None>
     <None Include="vertShader.glsl">
       <Filter>Source Files\OGLS</Filter>
     </None>
     <None Include="fragShader.glsl">
       <Filter>Source Files\OGLS</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="survival backpack\1001_AO.jpg">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </Image>
-    <Image Include="survival backpack\1001_metallic.jpg">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </Image>
-    <Image Include="survival backpack\1001_normal.png">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </Image>
-    <Image Include="survival backpack\1001_roughness.jpg">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </Image>
-    <Image Include="survival backpack\1001_albedo.jpg">
-      <Filter>Resource Files\Survival Backpack</Filter>
-    </Image>
   </ItemGroup>
 </Project>

@@ -11,6 +11,11 @@ Agent::Agent(string path, Controller c, vec3 position, vec3 velocity, vec3 orien
 	this->controller = c;
 }
 
+Agent::Agent():Thing()
+{
+
+}
+
 Agent::~Agent()
 {
 }

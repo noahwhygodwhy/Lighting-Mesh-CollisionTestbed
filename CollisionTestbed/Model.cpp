@@ -14,7 +14,7 @@ Model::Model()
 
 Model::Model(const char* path)
 {
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(false);
 	loadModel(path);
 }
 

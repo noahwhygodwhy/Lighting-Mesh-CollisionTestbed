@@ -25,6 +25,14 @@ Thing::Thing(string path, vec3 position, vec3 velocity, vec3 orientation)
 	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(1, 0, 1));
 	this->velocity = velocity;
 }
+
+Thing::Thing()
+{
+	this->model = Model();
+	this->transform = mat4(1.0f);
+	this->velocity = vec3(0, 0, 0);
+}
+
 Thing::~Thing()
 {
 

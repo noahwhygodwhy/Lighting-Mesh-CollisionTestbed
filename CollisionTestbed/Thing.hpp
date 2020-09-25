@@ -15,6 +15,7 @@ class Thing
 public:
 	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
 	Thing(string path, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
+	Thing();
 	~Thing();
 	void tick(float deltaTime);
 	void draw(Shader shader);

@@ -120,10 +120,17 @@ bool Renderer::initialize()
 	glEnable(GL_FRAMEBUFFER_SRGB);
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
+
+	glEnable(GL_LINE_SMOOTH);
+	glLineWidth(2.0f);
+
 	return true;
 }
 void Renderer::run()
 {
+
+	//if()
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -144,8 +151,13 @@ void Renderer::run()
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
 		shader.setMatFour("projection", projection);
 
+
 		int i = 0;
-		for (Thing t : things)
+
+		//this->player.tick(deltaTime);
+		//this->player.draw(shader);
+
+		for (Thing t : things) //Everything else
 		{
 			t.tick(deltaTime);
 			t.draw(shader);
