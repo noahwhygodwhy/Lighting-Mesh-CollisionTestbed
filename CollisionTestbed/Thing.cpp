@@ -1,8 +1,16 @@
-#include "Thing.hpp"
-#include "Model.hpp"
 #include <glm/ext.hpp>
 #include <glm/gtx/string_cast.hpp>
+#include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+#include "Thing.hpp"
+#include "Model.hpp"
+
 #define GLM_ENABLE_EXPERIMENTAL
+
+using namespace std;
+using namespace nlohmann;
 
 Thing::Thing(Model m, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
@@ -18,8 +26,8 @@ Thing::Thing(Model m, vec3 position, vec3 velocity, vec3 orientation, ThingType 
 
 
 Thing::Thing()
-{
-	this->type = ThingType::THING;
+{	
+	this->type = ThingType::ERROR;
 	this->model = Model();
 	this->transform = mat4(1.0f);
 	this->velocity = vec3(0, 0, 0);
@@ -30,6 +38,19 @@ Thing::~Thing()
 
 }
 
+Thing Thing::fromJson(string path)
+{
+	ifstream theFile;
+	theFile.open(path);
+	if (!theFile.good())
+	{
+		printf("error loading model from json:\n%s\n", path);
+		return Thing(); //default things have a type of ERROR, so this indicates it's wrong
+	}
+
+	json j;
+	theFile >> j;
+}
 
 void Thing::tick(float deltaTime)
 {

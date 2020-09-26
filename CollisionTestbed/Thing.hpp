@@ -7,6 +7,7 @@
 #include "Model.hpp"
 #include <string>
 
+
 using namespace std;
 using namespace glm;
 
@@ -15,7 +16,8 @@ enum class ThingType
 	THING,
 	AGENT,
 	OBJECT,
-	ENVIRONMENT
+	ENVIRONMENT,
+	ERROR
 };
 
 class Thing
@@ -24,6 +26,10 @@ public:
 	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
 	Thing();
 	~Thing();
+
+
+	Thing fromJson(string path);
+
 	void tick(float deltaTime);
 	void draw(Shader shader);
 
@@ -49,4 +55,6 @@ private:
 	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
+
+
 #endif

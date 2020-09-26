@@ -20,16 +20,16 @@ int main(void)
 	string Agent1Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/survival backpack/backpack.obj";
 	string Agent2Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.obj";
 
-	Model playerModel = Model(Agent2Path.c_str());
-	Model otherModel = Model(Agent2Path.c_str());
-	Player p1 = Player(Agent1Path, PlayerController(), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
+	//Model playerModel = Model(Agent2Path.c_str());
+	//Model otherModel = Model(Agent2Path.c_str());
+	//Agent p1 = Agent(playerModel, Controller(), vec3(0, 0, 0));
 	//Player p1 = Player("C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1", PlayerController(), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
-	Agent p2 = Agent(otherModel, Controller(), vec3(5, 0, 0));
+	//Agent p2 = Agent(otherModel, Controller(), vec3(5, 0, 0));
 
 
 	//r.addPlayer(p1);
-	r.addThing(p1);
-	r.addThing(p2);
+	//r.addThing(p1);
+	//r.addThing(p2);
 	
 	printf("###running\n");
 	r.run();
