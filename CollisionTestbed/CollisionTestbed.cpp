@@ -20,6 +20,8 @@ int main(void)
 	string Agent1Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/survival backpack/backpack.obj";
 	string Agent2Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.obj";
 
+	Thing a = fromJson("C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.json");
+
 	//Model playerModel = Model(Agent2Path.c_str());
 	//Model otherModel = Model(Agent2Path.c_str());
 	//Agent p1 = Agent(playerModel, Controller(), vec3(0, 0, 0));

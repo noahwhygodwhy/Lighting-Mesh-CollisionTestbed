@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Survival Backpack">
-      <UniqueIdentifier>{d8973984-ea06-4552-bf22-51cd73351a6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Things">
       <UniqueIdentifier>{a349b60c-2763-43d9-9c9a-9d4e50effb47}</UniqueIdentifier>
     </Filter>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="Header Files\Things">
       <UniqueIdentifier>{3490eaef-b17f-4678-8e8c-f1957ad3061b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\agent1">
-      <UniqueIdentifier>{329e45cf-fa39-4b13-b130-f1747eb291a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

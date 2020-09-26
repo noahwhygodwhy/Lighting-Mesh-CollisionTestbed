@@ -1,5 +1,5 @@
 {
-	"type": "agent"
+	"type": "agent",
 	"model": "agent1.obj",
 	"positionOffset": {
 		"x": 0.0,
@@ -7,7 +7,6 @@
 		"z": 0.0
 	},
 	"camera": {
-
 		"cameraOffset": {
 			"x": 0.0,
 			"y": 7.45,

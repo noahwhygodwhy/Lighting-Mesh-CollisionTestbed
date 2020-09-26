@@ -38,19 +38,11 @@ Thing::~Thing()
 
 }
 
-Thing Thing::fromJson(string path)
+vec3 jsonToVec3(json j)
 {
-	ifstream theFile;
-	theFile.open(path);
-	if (!theFile.good())
-	{
-		printf("error loading model from json:\n%s\n", path);
-		return Thing(); //default things have a type of ERROR, so this indicates it's wrong
-	}
-
-	json j;
-	theFile >> j;
+	return vec3(0, 0, 0); //TODO::
 }
+
 
 void Thing::tick(float deltaTime)
 {
@@ -95,3 +87,59 @@ void Thing::rotateSet(vec3 rotation)
 
 }
 //TODO: END
+
+Thing fromJson(string path)
+{
+	ifstream theFile;
+	theFile.open(path);
+	if (!theFile.good())
+	{
+		printf("error loading model from json:\n%s\n", path.c_str());
+		return Thing(); //default things have a type of ERROR, so this indicates it's wrong
+	}
+	printf("file is good: %i\n", theFile.good());
+
+	try
+	{
+		json j;
+		theFile >> j;
+		printf("%s\n", j.dump().c_str());
+		printf("the type is as follows:\n");
+		fflush(stdout);
+
+		//Everything will have at least these four
+		string type = j["type"];
+		string model = j["model"];
+		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
+		Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
+
+		//TODO: later attributes might include weight, speed, interactability
+
+		if (type == "agent")
+		{
+			//if it's an agent, it might have a camera, a gunport
+		}
+		else if (type == "object")
+		{
+			//if it's an object, just make it
+		}
+		else if (type == "environment")
+		{
+			//if it's an environment, just make it
+		}
+
+		printf("%s\n", type.c_str());
+		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
+		if (!j.find("cameraNotExist").value().empty())
+		{
+
+		}
+	}
+	catch (exception e)
+	{
+		printf("error loading model from json:\n%s\nimproper json format, validate using external tool\n%s\n", path.c_str(), e.what());
+	}
+
+	return Thing();
+
+}
