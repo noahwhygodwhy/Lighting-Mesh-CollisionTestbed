@@ -10,11 +10,18 @@
 using namespace std;
 using namespace glm;
 
+enum class ThingType
+{
+	THING,
+	AGENT,
+	OBJECT,
+	ENVIRONMENT
+};
+
 class Thing
 {
 public:
-	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
-	Thing(string path, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
+	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
 	Thing();
 	~Thing();
 	void tick(float deltaTime);
@@ -32,6 +39,7 @@ public:
 
 	//void impart force(..?);
 private:
+	ThingType type;
 	mat4 transform;
 	//vec3 position;
 	//vec3 orientation; //TODO: maybe figure out quaternions...

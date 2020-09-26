@@ -73,7 +73,7 @@ void processInput(GLFWwindow* window, Camera& cam)
 	}
 }
 
-void Renderer::addPlayer(Player p)
+void Renderer::addPlayer(Agent p)
 {
 	this->player = p;
 }

@@ -10,7 +10,7 @@
 #include "Thing.hpp"
 #include "glad.h"
 #include <GLFW/glfw3.h>
-#include "Player.hpp"
+#include "Agent.hpp"
 
 class Renderer
 {
@@ -20,9 +20,9 @@ public:
 	bool initialize();
 	void run();
 	void addThing(Thing th);
-	void addPlayer(Player p);
+	void addPlayer(Agent p);
 private:
-	Player player;
+	Agent player;
 	vector<Thing> things;
 	unsigned int largeTextureStack = 0;
 	int screenX;
