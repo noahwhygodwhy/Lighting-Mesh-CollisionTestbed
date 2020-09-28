@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Things">
       <UniqueIdentifier>{3490eaef-b17f-4678-8e8c-f1957ad3061b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Hitboxes">
+      <UniqueIdentifier>{0af5df87-7a38-48d7-8c1c-5503640a7c69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hitboxes">
+      <UniqueIdentifier>{30c131ad-30cd-4267-9e69-461e6931caa9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionTestbed.cpp">
@@ -77,6 +83,18 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Hitbox.cpp">
+      <Filter>Source Files\Hitboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="PrimativeHitbox.cpp">
+      <Filter>Source Files\Hitboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlllppHitbox.hpp">
+      <Filter>Header Files\Hitboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlllppHitbox.cpp">
+      <Filter>Source Files\Hitboxes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="PlayerController.hpp">
       <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Hitbox.hpp">
+      <Filter>Header Files\Hitboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimativeHitbox.hpp">
+      <Filter>Header Files\Hitboxes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

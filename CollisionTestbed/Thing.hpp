@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Model.hpp"
 #include <string>
+#include "Hitbox.hpp"
 
 
 using namespace std;
@@ -26,7 +27,7 @@ class Thing
 {
 	
 public:
-	Thing(Model m, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
+	Thing(Model m, Hitbox h, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
 	Thing();
 	~Thing();
 

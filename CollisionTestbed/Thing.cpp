@@ -11,8 +11,7 @@
 
 using namespace std;
 using namespace nlohmann;
-
-Thing::Thing(Model m, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
+Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
 	this->model = m;
 	this->transform = mat4(1.0f);
@@ -111,13 +110,19 @@ Thing fromJson(string path)
 		string type = j["type"];
 		string model = j["model"];
 		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
-		Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
+
+		//Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
 
 		//TODO: later attributes might include weight, speed, interactability
 
 		if (type == "agent")
 		{
-			//if it's an agent, it might have a camera, a gunport
+			vec3 cameraOffset = jsonToVec3(j["camera"]["cameraOffset"]);
+			vec3 cameraVector = jsonToVec3(j["camera"]["cameraVector"]);
+
+			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
+			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
+			//if it's an agent, will have a gunport and a camera
 		}
 		else if (type == "object")
 		{
@@ -126,13 +131,6 @@ Thing fromJson(string path)
 		else if (type == "environment")
 		{
 			//if it's an environment, just make it
-		}
-
-		printf("%s\n", type.c_str());
-		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
-		if (!j.find("cameraNotExist").value().empty())
-		{
-
 		}
 	}
 	catch (exception e)
