@@ -151,6 +151,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionTestbed.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="CylinderHitbox.cpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLSLReader.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Agent.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Controller.hpp" />
+    <ClInclude Include="CylinderHitbox.hpp" />
     <ClInclude Include="DirectionEnum.h" />
     <ClInclude Include="Environment.hpp" />
     <ClInclude Include="glad.h" />
