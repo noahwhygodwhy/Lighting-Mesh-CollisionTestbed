@@ -96,6 +96,9 @@
     <ClCompile Include="PlllppHitbox.cpp">
       <Filter>Source Files\Hitboxes</Filter>
     </ClCompile>
+    <ClCompile Include="RectHitbox.cpp">
+      <Filter>Source Files\Hitboxes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.hpp">
@@ -153,6 +156,9 @@
       <Filter>Header Files\Hitboxes</Filter>
     </ClInclude>
     <ClInclude Include="PrimativeHitbox.hpp">
+      <Filter>Header Files\Hitboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="RectHitbox.hpp">
       <Filter>Header Files\Hitboxes</Filter>
     </ClInclude>
   </ItemGroup>

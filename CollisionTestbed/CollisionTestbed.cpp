@@ -6,10 +6,12 @@
 #include "Controller.hpp"
 #include "PlayerController.hpp"
 
+
 using namespace std;
 
 int main(void)
 {
+
 	printf("###starting\n");
 	Renderer r = Renderer(1920, 1080);
 	printf("###initializing\n");

@@ -14,11 +14,13 @@ using namespace glm;
 class PrimativeHitbox : Hitbox
 {
 public:
-	PrimativeHitbox(vec3 origin, string type);
+	PrimativeHitbox(vec3 origin, float dim1, float dim2, float dim3);
 	~PrimativeHitbox();
 
 private:
-
+	float dim1;
+	float dim2;
+	float dim3;
 };
 
 #endif
