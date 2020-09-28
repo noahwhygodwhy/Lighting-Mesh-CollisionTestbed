@@ -31,7 +31,7 @@
 		}
 	},
 	"hitbox": {
-		"type": "basic_cylinder",
+		"type": "Cylinder",
 		"radius": 2,
 		"height": 8.85
 	}
