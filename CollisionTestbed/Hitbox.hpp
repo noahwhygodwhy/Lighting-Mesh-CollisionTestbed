@@ -25,6 +25,7 @@ private:
 	vec3 origin;
 };
 
+vec3 jsonToVec3(json j);
 Hitbox jsonToHitbox(json j);
 
 #endif

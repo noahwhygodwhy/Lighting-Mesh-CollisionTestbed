@@ -4,8 +4,13 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-#include "Thing.hpp"
 #include "Model.hpp"
+
+#include "Thing.hpp"
+#include "Agent.hpp"
+#include "Environment.hpp"
+#include "Object.hpp"
+#
 
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -84,6 +89,7 @@ void Thing::rotateSet(vec3 rotation)
 }
 //TODO: END
 
+static unordered_map<std::string, Model> loadedModels; //TODO: might need to be a model pointer, not a model
 Thing jsonToThing(string path)
 {
 	ifstream theFile;
@@ -105,7 +111,22 @@ Thing jsonToThing(string path)
 
 		//Everything will have at least these four
 		string type = j["type"];
+		
 		string model = j["model"];
+
+		Model m;
+		if (loadedModels.count(model) > 0)
+		{
+			m = loadedModels[path];
+		}
+		else
+		{
+			m = Model(model.c_str());
+			loadedModels[path] = m;
+		}
+
+
+
 		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
 
 		Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
@@ -120,6 +141,7 @@ Thing jsonToThing(string path)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
+			return Agent(m, Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
 		}
 		else if (type == "object")
 		{
@@ -129,6 +151,7 @@ Thing jsonToThing(string path)
 		{
 			//if it's an environment, just make it
 		}
+		return Thing();
 	}
 	catch (exception e)
 	{

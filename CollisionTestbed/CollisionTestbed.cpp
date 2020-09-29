@@ -19,8 +19,8 @@ int main(void)
 	printf("###adding model\n");
 	//r.addModel("C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/brickCube/brickCube.obj");
 
-	string Agent1Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/survival backpack/backpack.obj";
-	string Agent2Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.obj";
+	//string Agent1Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/survival backpack/backpack.obj";
+	//string Agent2Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.obj";
 
 	Thing a = jsonToThing("C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.json");
 
@@ -36,6 +36,6 @@ int main(void)
 	//r.addThing(p2);
 	
 	printf("###running\n");
-	r.run();
+	//r.run();
 	printf("###ending\n");
 }

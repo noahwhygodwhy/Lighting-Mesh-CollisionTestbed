@@ -12,6 +12,8 @@
 using namespace std;
 using namespace glm;
 
+
+//idk if this is needed, but i made it because i thought i might need it
 enum class ThingType
 {
 
@@ -58,5 +60,6 @@ private:
 	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
+Thing jsonToThing(string path);
 
 #endif
