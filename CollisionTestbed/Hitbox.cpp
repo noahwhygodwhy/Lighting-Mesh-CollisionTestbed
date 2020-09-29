@@ -16,7 +16,7 @@ Hitbox::~Hitbox()
 
 vec3 jsonToVec3(json j)
 {
-	return vec3(0, 0, 0); //TODO::
+	return vec3(j["x"], j["y"], j["z"]);
 }
 Hitbox jsonToHitbox(json j)
 {
