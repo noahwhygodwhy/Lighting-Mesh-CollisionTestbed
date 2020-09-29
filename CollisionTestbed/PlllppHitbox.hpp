@@ -8,7 +8,7 @@
 
 
 //https://en.wikipedia.org/wiki/Parallelepiped
-class PlllppHitbox : Hitbox
+class PlllppHitbox : public Hitbox
 {
 public:
 	PlllppHitbox(vec3 origin, vec3 a, vec3 b, vec3 c);

@@ -11,7 +11,7 @@
 using namespace std;
 using namespace glm;
 
-class PrimativeHitbox : Hitbox
+class PrimativeHitbox : public Hitbox
 {
 public:
 	PrimativeHitbox(vec3 origin, float dim1, float dim2, float dim3);

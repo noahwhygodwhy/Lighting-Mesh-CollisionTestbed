@@ -7,6 +7,7 @@
 #include "Thing.hpp"
 #include "Model.hpp"
 
+
 #define GLM_ENABLE_EXPERIMENTAL
 
 using namespace std;
@@ -37,10 +38,6 @@ Thing::~Thing()
 
 }
 
-vec3 jsonToVec3(json j)
-{
-	return vec3(0, 0, 0); //TODO::
-}
 
 
 void Thing::tick(float deltaTime)
@@ -87,7 +84,7 @@ void Thing::rotateSet(vec3 rotation)
 }
 //TODO: END
 
-Thing fromJson(string path)
+Thing jsonToThing(string path)
 {
 	ifstream theFile;
 	theFile.open(path);
@@ -111,7 +108,7 @@ Thing fromJson(string path)
 		string model = j["model"];
 		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
 
-		//Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
+		Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
 
 		//TODO: later attributes might include weight, speed, interactability
 

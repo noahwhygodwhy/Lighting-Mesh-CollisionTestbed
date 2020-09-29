@@ -7,7 +7,7 @@
 using namespace std;
 using namespace glm;
 
-class CylinderHitbox : PrimativeHitbox
+class CylinderHitbox : public PrimativeHitbox
 {
 public:
 	CylinderHitbox(vec3 origin, float radius, float height);

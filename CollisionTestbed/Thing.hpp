@@ -58,6 +58,5 @@ private:
 	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
-Thing fromJson(string path);
 
 #endif

@@ -3,7 +3,7 @@
 
 #include "PrimativeHitbox.hpp"
 
-class RectHitbox : PrimativeHitbox
+class RectHitbox : public PrimativeHitbox
 {
 public:
 	RectHitbox(vec3 origin, float x, float y, float z);

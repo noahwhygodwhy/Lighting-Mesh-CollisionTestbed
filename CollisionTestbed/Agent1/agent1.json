@@ -32,6 +32,11 @@
 	},
 	"hitbox": {
 		"type": "Cylinder",
+		"origin": {
+			"x": 0.0,
+			"y": 0.0,
+			"z": 0.0
+		}
 		"radius": 2,
 		"height": 8.85
 	}
