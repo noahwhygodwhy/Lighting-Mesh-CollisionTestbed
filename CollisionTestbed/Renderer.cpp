@@ -73,12 +73,12 @@ void processInput(GLFWwindow* window, Camera& cam)
 	}
 }
 
-void Renderer::addPlayer(Agent p)
+void Renderer::setPlayer(Agent* p)
 {
 	this->player = p;
 }
 
-void Renderer::addThing(Thing th)
+void Renderer::addThing(Thing* th)
 {
 	things.push_back(th);
 }
@@ -157,10 +157,10 @@ void Renderer::run()
 		//this->player.tick(deltaTime);
 		//this->player.draw(shader);
 
-		for (Thing t : things) //Everything else
+		for (auto t : things) //Everything else
 		{
-			t.tick(deltaTime);
-			t.draw(shader);
+			t->tick(deltaTime);
+			t->draw(shader);
 		}
 		glfwSwapBuffers(window);
 		glfwPollEvents();

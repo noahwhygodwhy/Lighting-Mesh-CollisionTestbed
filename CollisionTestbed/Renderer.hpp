@@ -19,11 +19,11 @@ public:
 	~Renderer();
 	bool initialize();
 	void run();
-	void addThing(Thing th);
-	void addPlayer(Agent p);
+	void addThing(Thing* th);
+	void setPlayer(Agent* p);
 private:
-	Agent player;
-	vector<Thing> things;
+	Agent* player;
+	vector<IThing*> things;
 	unsigned int largeTextureStack = 0;
 	int screenX;
 	int screenY;

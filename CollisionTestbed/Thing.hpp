@@ -4,8 +4,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "Model.hpp"
 #include <string>
+#include "Model.hpp"
 #include "Hitbox.hpp"
 
 
@@ -13,19 +13,35 @@ using namespace std;
 using namespace glm;
 
 
+
+class IThing
+{
+public:
+	virtual void tick(float deltaTime) = 0;
+	virtual void draw(Shader shader) = 0;
+};
+
 //idk if this is needed, but i made it because i thought i might need it
 enum class ThingType
 {
-
 	THING,
 	AGENT,
 	OBJECT,
 	ENVIRONMENT,
 	ERROR
-
 };
 
-class Thing
+/*struct positional
+{
+	mat4 transform;
+	vec3 velocity;
+
+	vec3 spinAxis;
+	float spinRate;
+	int weight = 1;//i'll have to calculate this later...idk how
+};*/
+
+class Thing : public IThing
 {
 	
 public:
@@ -48,6 +64,7 @@ public:
 	void rotateAbsolute(vec3 axis, float degrees);
 	void rotateSet(vec3 rotation);
 
+
 	//void impart force(..?);
 private:
 	ThingType type;
@@ -60,6 +77,6 @@ private:
 	int weight;//? idk how to calculate that but i'll figure it out.
 	Model model;
 };
-Thing jsonToThing(string path);
+Thing* jsonToThing(string path);
 
 #endif

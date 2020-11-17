@@ -19,7 +19,9 @@ public:
 	Agent();
 	~Agent();
 
-	Controller getController();
+	void tick(float deltaTime);
+
+//	Controller getController();
 
 private:
 	Controller controller;

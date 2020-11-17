@@ -19,6 +19,7 @@ Agent::Agent(Model m,
 	this->gunportOffset = gunportOffset;
 	this->gunportVector = gunportVector;
 	this->controller = c;
+	this->controller.giveThing(this);
 }
 
 Agent::Agent():Thing()
@@ -29,11 +30,16 @@ Agent::Agent():Thing()
 	this->gunportVector = vec3(0);
 }
 
+void Agent::tick(float deltaTime)
+{
+	this->controller.tick(deltaTime);
+}
+
 Agent::~Agent()
 {
 }
 
-Controller Agent::getController()
+/*Controller Agent::getController()
 {
 	return this->controller;
-}
+}*/

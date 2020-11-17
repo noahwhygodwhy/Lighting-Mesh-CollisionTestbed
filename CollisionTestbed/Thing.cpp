@@ -69,7 +69,7 @@ void Thing::impartSpin(vec3 axis, float magnitude)
 }
 void Thing::moveRelative(vec3 shift)
 {
-
+	this->transform = glm::translate(this->transform, shift);
 }
 void Thing::moveAbsolute(vec3 newPosition)
 {
@@ -77,7 +77,7 @@ void Thing::moveAbsolute(vec3 newPosition)
 }
 void Thing::rotateRelative(vec3 axis, float degrees)
 {
-
+	this->transform = glm::rotate(this->transform, glm::radians(degrees), axis);
 }
 void Thing::rotateAbsolute(vec3 axis, float degrees)
 {
@@ -90,14 +90,16 @@ void Thing::rotateSet(vec3 rotation)
 //TODO: END
 
 static unordered_map<std::string, Model> loadedModels; //TODO: might need to be a model pointer, not a model
-Thing jsonToThing(string path)
+Thing* jsonToThing(string thingTitle)
 {
+
+	string path = thingTitle + "/" + thingTitle + ".json";
 	ifstream theFile;
 	theFile.open(path);
 	if (!theFile.good())
 	{
 		printf("error loading model from json:\n%s\n", path.c_str());
-		return Thing(); //default things have a type of ERROR, so this indicates it's wrong
+		return new Thing(); //default things have a type of ERROR, so this indicates it's wrong
 	}
 	printf("file is good: %i\n", theFile.good());
 
@@ -112,17 +114,17 @@ Thing jsonToThing(string path)
 		//Everything will have at least these four
 		string type = j["type"];
 		
-		string model = j["model"];
+		string modelName = j["model"];
 
-		Model m;
-		if (loadedModels.count(model) > 0)
+		Model model;
+		if (loadedModels.count(modelName) > 0)
 		{
-			m = loadedModels[path];
+			model = loadedModels[path];
 		}
 		else
 		{
-			m = Model(model.c_str());
-			loadedModels[path] = m;
+			model = Model((thingTitle+"/"+ modelName).c_str());
+			loadedModels[path] = model;
 		}
 
 
@@ -141,7 +143,7 @@ Thing jsonToThing(string path)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			return Agent(m, Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			return new Agent(model, Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
 		}
 		else if (type == "object")
 		{
@@ -151,13 +153,13 @@ Thing jsonToThing(string path)
 		{
 			//if it's an environment, just make it
 		}
-		return Thing();
+		return new Thing();
 	}
 	catch (exception e)
 	{
 		printf("error loading model from json:\n%s\nimproper json format, validate using external tool\n%s\n", path.c_str(), e.what());
 	}
 
-	return Thing();
+	return new Thing();
 
 }
