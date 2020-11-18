@@ -17,7 +17,7 @@
 
 using namespace std;
 using namespace nlohmann;
-Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
+Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, vec3 up, vec3 foward, ThingType type)
 {
 	this->model = m;
 	this->transform = mat4(1.0f);
@@ -27,6 +27,8 @@ Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, 
 	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(1, 0, 1));
 	this->velocity = velocity;
 	this->type = type;
+	this->up = up;
+	this->forward = forward;
 }
 
 

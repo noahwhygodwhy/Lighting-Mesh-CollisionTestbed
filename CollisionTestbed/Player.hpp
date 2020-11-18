@@ -1,19 +1,36 @@
-//#ifndef PLAYER_H
-//#define PLAYER_H
-//#include <string>
-//#include "Agent.hpp"
-//#include "Camera.hpp"
-//
-//class Player : public Agent
-//{
-//public:
-//	Player();
-//	Player(Model m, Controller c, vec3 camPos, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));
-//	Player(string path, Controller c, vec3 camPos, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0));//TODO:
-//	~Player();
-//	Camera getCam();
-//
-//private:
-//	Camera cam;
-//};
-//#endif
+#ifndef PLAYER_H
+#define PLAYER_H
+#include "Agent.hpp"
+#include "PlayerController.hpp"
+
+class Player : public Agent
+{
+public:
+	Player(Model m,
+		Controller c,
+		Hitbox h,
+		vec3 cameraOffset = vec3(0, 0, 0),
+		vec3 cameraVector = vec3(0, 0, 1),
+		vec3 gunportOffset = vec3(0, 0, 0),
+		vec3 gunportVector = vec3(0, 0, 1),
+		vec3 position = vec3(0, 0, 0),
+		vec3 velocity = vec3(0, 0, 0),
+		vec3 orientation = vec3(0, 0, 0),
+		vec3 up = vec3(0, 0, 0),
+		vec3 forward = vec3(0, 0, 0));
+	Player();
+	~Player();
+
+	void tick(float deltaTime);
+	PlayerController controller;
+
+	//	Controller getController();
+
+private:
+	vec3 cameraOffset;
+	vec3 cameraVector;
+	vec3 gunportOffset;
+	vec3 gunportVector;
+
+};
+#endif

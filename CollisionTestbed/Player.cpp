@@ -1,24 +1,22 @@
-//#include "Player.hpp"
-//
-//Player::Player(Model m, Controller c, vec3 camPos, vec3 position, vec3 velocity, vec3 orientation) : Agent(m, c, position, velocity, orientation)
-//{
-//
-//}
-//Player::Player(string path, Controller c, vec3 camPos, vec3 position, vec3 velocity, vec3 orientation) : Agent(path, c, position, velocity, orientation)
-//{
-//
-//}
-//
-//Player::Player() : Agent() //This is probably superbad, but idk how else to handle it
-//{
-//
-//}
-//
-//Camera Player::getCam()
-//{
-//	return this->cam;
-//}
-//Player::~Player()
-//{
-//}
-//
+#include "Player.hpp"
+
+Player::Player():Agent()
+{
+
+}
+
+Player::Player(Model m,
+	Controller c,
+	Hitbox h,
+	vec3 cameraOffset,
+	vec3 cameraVector,
+	vec3 gunportOffset,
+	vec3 gunportVector,
+	vec3 position,
+	vec3 velocity,
+	vec3 orientation,
+	vec3 up,
+	vec3 forward) : Agent(m, c, h, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, up, forward, ThingType::PLAYER)
+{
+
+}

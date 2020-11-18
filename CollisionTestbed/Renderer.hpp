@@ -11,6 +11,7 @@
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include "Agent.hpp"
+#include "Player.hpp"
 
 class Renderer
 {
@@ -20,9 +21,9 @@ public:
 	bool initialize();
 	void run();
 	void addThing(Thing* th);
-	void setPlayer(Agent* p);
+	void setPlayer(Player* p);
 private:
-	Agent* player;
+	Player* player;
 	vector<IThing*> things;
 	unsigned int largeTextureStack = 0;
 	int screenX;

@@ -49,10 +49,10 @@ int main(void)
 	//r.addPlayer(p1);
 	//r.addThing(p1);
 	//r.addThing(p2);
-	r.addThing(a);
-	r.addThing(b);
-	r.addThing(c);
-	r.addPlayer(p);
+	//r.addThing(a);
+	//r.addThing(b);
+	//r.addThing(c);
+	r.setPlayer(p);
 	//r.addPlayer(b);
 	printf("###running\n");
 	r.run();

@@ -11,8 +11,11 @@ Agent::Agent(Model m,
 	vec3 gunportVector,
 	vec3 position,
 	vec3 velocity,
-	vec3 orientation)
-	:Thing(m, h, position, velocity, orientation, ThingType::AGENT)
+	vec3 orientation,
+	vec3 up,
+	vec3 forward,
+	ThingType thingtype)
+	:Thing(m, h, position, velocity, orientation, up, forward, thingtype)
 { 
 	this->cameraOffset = cameraOffset;
 	this->cameraVector = cameraVector;
@@ -20,6 +23,7 @@ Agent::Agent(Model m,
 	this->gunportVector = gunportVector;
 	this->controller = c;
 	this->controller.giveThing(this);
+	this->speed = 1.0;
 }
 
 Agent::Agent():Thing()
@@ -28,6 +32,7 @@ Agent::Agent():Thing()
 	this->cameraVector = vec3(0);
 	this->gunportOffset = vec3(0);
 	this->gunportVector = vec3(0);
+	this->speed = 1.0;
 }
 
 void Agent::tick(float deltaTime)
@@ -37,6 +42,10 @@ void Agent::tick(float deltaTime)
 
 Agent::~Agent()
 {
+}
+float Agent::getSpeed()
+{
+	return this->speed;
 }
 
 /*Controller Agent::getController()

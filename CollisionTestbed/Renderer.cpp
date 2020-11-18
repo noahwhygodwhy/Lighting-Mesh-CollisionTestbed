@@ -73,9 +73,31 @@ void processInput(GLFWwindow* window, Camera& cam)
 	}
 }
 
-void Renderer::setPlayer(Agent* p)
+static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	Player* p = (Player*) glfwGetWindowUserPointer(window);
+	p->controller.keyCallback(window, key, scancode, action, mods, p->getSpeed());
+}
+static void mouseButtCallback(GLFWwindow* window, int button, int action, int mods)
+{
+	Player* p = (Player*)glfwGetWindowUserPointer(window);
+	p->controller.mouseButtCallback(window, button, action, mods);
+}
+static void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
+{
+	Player* p = (Player*)glfwGetWindowUserPointer(window);
+	p->controller.mouseMoveCallback(window, xpos, ypos);
+}
+
+
+void Renderer::setPlayer(Player* p)
 {
 	this->player = p;
+	glfwSetWindowUserPointer(this->window, this->player);
+	glfwSetKeyCallback(this->window, keyCallback);
+	glfwSetMouseButtonCallback(this->window, mouseButtCallback);
+	glfwSetCursorPosCallback(this->window, mouseMoveCallback);
+
 }
 
 void Renderer::addThing(Thing* th)
@@ -96,17 +118,17 @@ bool Renderer::initialize()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SRGB_CAPABLE, 1);
 	//glfwWindowHint(GLFW_SAMPLES, 16);
-	window = glfwCreateWindow(screenX, screenY, "Title Goes here", NULL, NULL);
+	this->window = glfwCreateWindow(screenX, screenY, "Title Goes here", NULL, NULL);
 
 
-	if (window == NULL)
+	if (this->window == NULL)
 	{
 		cout << "Window creation failed" << endl;
 		exit(-1);
 	}
 
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+	glfwMakeContextCurrent(this->window);
+	glfwSetFramebufferSizeCallback(this->window, frameBufferSizeCallback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -128,10 +150,7 @@ bool Renderer::initialize()
 }
 void Renderer::run()
 {
-
-	//if()
-
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(this->window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -142,9 +161,10 @@ void Renderer::run()
 
 
 
-		processInput(window, cam);
+		processInput(this->window, cam);
 		shader.use();
 
+		
 		mat4 view = cam.getView();
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
 		shader.setMatFour("view", view);
@@ -152,17 +172,16 @@ void Renderer::run()
 		shader.setMatFour("projection", projection);
 
 
-		int i = 0;
 
-		//this->player.tick(deltaTime);
-		//this->player.draw(shader);
+		this->player->tick(deltaTime);
+		this->player->draw(shader);
 
 		for (auto t : things) //Everything else
 		{
 			t->tick(deltaTime);
 			t->draw(shader);
 		}
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(this->window);
 		glfwPollEvents();
 	}
 	glfwTerminate();
