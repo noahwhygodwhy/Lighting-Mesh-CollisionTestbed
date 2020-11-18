@@ -3,11 +3,13 @@
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #include "Model.hpp"
 
 #include "Thing.hpp"
 #include "Agent.hpp"
+#include "Player.hpp"
 #include "Environment.hpp"
 #include "Object.hpp"
 #
@@ -19,12 +21,14 @@ using namespace std;
 using namespace nlohmann;
 Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, vec3 up, vec3 foward, ThingType type)
 {
+	printf("making new thing\n");
 	this->model = m;
 	this->transform = mat4(1.0f);
-	this->transform = glm::translate(this->transform, position);
+	cout << glm::to_string(this->transform) <<endl;
+	/*this->transform = glm::translate(this->transform, position);
 	this->transform = glm::rotate(this->transform, radians(orientation.x), vec3(1, 0, 0));
 	this->transform = ::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
-	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(1, 0, 1));
+	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(1, 0, 1));*/
 	this->velocity = velocity;
 	this->type = type;
 	this->up = up;
@@ -58,7 +62,10 @@ void Thing::draw(Shader shader)
 }
 
 
-
+Model Thing::getModel()
+{
+	return this->model;
+}
 
 //TODO: BEGIN
 void Thing::impartForce(vec3 direction, float magnitude)
@@ -145,7 +152,21 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			return new Agent(model, Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			printf("making a new agent\n");
+			return new Agent(model, new Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+		}
+		else if (type == "player")
+		{
+			vec3 cameraOffset = jsonToVec3(j["camera"]["cameraOffset"]);
+			vec3 cameraVector = jsonToVec3(j["camera"]["cameraVector"]);
+
+			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
+			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
+			//if it's an agent, will have a gunport and a camera
+			printf("making the player/controller\n");
+			Player* p = new Player(model, new PlayerController(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			printf("finished making player\n");
+			return p;
 		}
 		else if (type == "object")
 		{

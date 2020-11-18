@@ -67,7 +67,6 @@ public:
 
 
 	//void impart force(..?);
-private:
 	ThingType type;
 	mat4 transform;
 	vec3 up;
@@ -78,6 +77,8 @@ private:
 	vec3 spinAxis;
 	float spinRate;
 	int weight;//? idk how to calculate that but i'll figure it out.
+	Model getModel();
+private:
 	Model model;
 };
 Thing* jsonToThing(string path);

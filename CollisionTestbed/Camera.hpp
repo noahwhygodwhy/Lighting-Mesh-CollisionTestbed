@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef CAMERA_H
+#define CAMERA_H
 #include "glad.h"
 //#include "Asset.hpp"
 //#include <glm/glm.hpp>
@@ -60,3 +62,5 @@ public:
 	float getId();
 
 };
+
+#endif

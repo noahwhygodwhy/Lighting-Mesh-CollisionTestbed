@@ -7,7 +7,7 @@ class Player : public Agent
 {
 public:
 	Player(Model m,
-		Controller c,
+		PlayerController* c,
 		Hitbox h,
 		vec3 cameraOffset = vec3(0, 0, 0),
 		vec3 cameraVector = vec3(0, 0, 1),
@@ -21,10 +21,8 @@ public:
 	Player();
 	~Player();
 
-	void tick(float deltaTime);
-	PlayerController controller;
-
-	//	Controller getController();
+	void tick(float deltaTime, GLFWwindow* window);
+	PlayerController* getController();
 
 private:
 	vec3 cameraOffset;

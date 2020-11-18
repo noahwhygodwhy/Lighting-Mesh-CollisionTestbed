@@ -7,7 +7,7 @@ class Agent : public Thing
 {
 public:
 	Agent(Model m, 
-		Controller c,
+		Controller * c,
 		Hitbox h,
 		vec3 cameraOffset = vec3(0, 0, 0),
 		vec3 cameraVector = vec3(0, 0, 1),
@@ -22,12 +22,12 @@ public:
 	Agent();
 	~Agent();
 
-	void tick(float deltaTime);
-	Controller controller;
+	void tick(float deltaTime, GLFWwindow* window);
 	float getSpeed();
-//	Controller getController();
+	Controller* getController();
 
 private:
+	Controller* controller;
 	float speed;
 	vec3 cameraOffset;
 	vec3 cameraVector;

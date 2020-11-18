@@ -6,7 +6,7 @@ Player::Player():Agent()
 }
 
 Player::Player(Model m,
-	Controller c,
+	PlayerController* c,
 	Hitbox h,
 	vec3 cameraOffset,
 	vec3 cameraVector,
@@ -18,5 +18,14 @@ Player::Player(Model m,
 	vec3 up,
 	vec3 forward) : Agent(m, c, h, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, up, forward, ThingType::PLAYER)
 {
+}
+void Player::tick(float deltaTime, GLFWwindow* window)
+{
+	this->getController()->tick(deltaTime, window);
+}
 
+
+PlayerController* Player::getController()
+{
+	return (PlayerController*)this->Agent::getController();
 }

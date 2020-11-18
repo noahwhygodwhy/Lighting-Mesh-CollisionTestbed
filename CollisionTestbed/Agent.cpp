@@ -3,7 +3,7 @@
 
 //Agent will eventually have a controller of sorts?
 Agent::Agent(Model m,
-	Controller c,
+	Controller * c,
 	Hitbox h,
 	vec3 cameraOffset,
 	vec3 cameraVector,
@@ -22,8 +22,15 @@ Agent::Agent(Model m,
 	this->gunportOffset = gunportOffset;
 	this->gunportVector = gunportVector;
 	this->controller = c;
-	this->controller.giveThing(this);
+	printf("id of controller for agent construtor: %i\n", this->controller->id);
+	this->controller->giveThing(this);
+	printf("id of controller for agent construtor2: %i\n", this->controller->id);
 	this->speed = 1.0;
+}
+
+Controller* Agent::getController()
+{
+	return this->controller;
 }
 
 Agent::Agent():Thing()
@@ -35,9 +42,9 @@ Agent::Agent():Thing()
 	this->speed = 1.0;
 }
 
-void Agent::tick(float deltaTime)
+void Agent::tick(float deltaTime, GLFWwindow* window)
 {
-	this->controller.tick(deltaTime);
+	this->controller->tick(deltaTime, window);
 }
 
 Agent::~Agent()
@@ -47,8 +54,3 @@ float Agent::getSpeed()
 {
 	return this->speed;
 }
-
-/*Controller Agent::getController()
-{
-	return this->controller;
-}*/

@@ -5,6 +5,7 @@
 #include "Controller.hpp"
 //#include "Camera.hpp"
 
+
 class PlayerController : public Controller
 {
 public:
@@ -13,7 +14,7 @@ public:
 	void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods, float speed);
 	void mouseButtCallback(GLFWwindow* window, int button, int action, int mods);
 	void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
-
+	void tick(float deltaTime, GLFWwindow* window);
 private:
 
 };

@@ -22,10 +22,10 @@ public:
 	Model(const char* path);
 	~Model();
 	void draw(Shader& shader, glm::mat4 transform);
+	string directory;
 private:
 	vector<Texture> loadedTextures;
 	vector<Mesh> meshes;
-	string directory;
 	void loadModel(string path);
 	void processNode(aiNode* node, const aiScene* scene);
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);

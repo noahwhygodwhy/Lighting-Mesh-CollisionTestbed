@@ -76,17 +76,18 @@ void processInput(GLFWwindow* window, Camera& cam)
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	Player* p = (Player*) glfwGetWindowUserPointer(window);
-	p->controller.keyCallback(window, key, scancode, action, mods, p->getSpeed());
+	p->getController()->keyCallback(window, key, scancode, action, mods, p->getSpeed());
 }
 static void mouseButtCallback(GLFWwindow* window, int button, int action, int mods)
 {
+
 	Player* p = (Player*)glfwGetWindowUserPointer(window);
-	p->controller.mouseButtCallback(window, button, action, mods);
+	p->getController()->mouseButtCallback(window, button, action, mods);
 }
 static void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
 	Player* p = (Player*)glfwGetWindowUserPointer(window);
-	p->controller.mouseMoveCallback(window, xpos, ypos);
+	p->getController()->mouseMoveCallback(window, xpos, ypos);
 }
 
 
@@ -151,7 +152,7 @@ bool Renderer::initialize()
 void Renderer::run()
 {
 	while (!glfwWindowShouldClose(this->window))
-	{
+	{	
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -161,7 +162,7 @@ void Renderer::run()
 
 
 
-		processInput(this->window, cam);
+		//processInput(this->window, cam);
 		shader.use();
 
 		
@@ -171,10 +172,8 @@ void Renderer::run()
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
 		shader.setMatFour("projection", projection);
 
-
-
-		this->player->tick(deltaTime);
-		this->player->draw(shader);
+		player->tick(deltaTime, this->window);
+		player->draw(shader);
 
 		for (auto t : things) //Everything else
 		{
