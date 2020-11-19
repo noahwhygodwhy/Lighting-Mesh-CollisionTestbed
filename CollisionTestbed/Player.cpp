@@ -14,9 +14,7 @@ Player::Player(Model m,
 	vec3 gunportVector,
 	vec3 position,
 	vec3 velocity,
-	vec3 orientation,
-	vec3 up,
-	vec3 forward) : Agent(m, c, h, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, up, forward, ThingType::PLAYER)
+	vec3 orientation) : Agent(m, c, h, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, ThingType::PLAYER)
 {
 }
 void Player::tick(float deltaTime, GLFWwindow* window)
@@ -28,4 +26,20 @@ void Player::tick(float deltaTime, GLFWwindow* window)
 PlayerController* Player::getController()
 {
 	return (PlayerController*)this->Agent::getController();
+}
+
+
+mat4 Player::getView()
+{
+	//TODO:
+	// make a new transform
+	// adjust that transform per the camera offset/camera vector
+	// return a lookat using that transform
+	//
+
+	//TODO: Adjust for camera offset
+	return lookAt(position, position + front, up);
+
+
+	return glm::lookAt(vec3(this->transform[3]), vec3(this->transform[3] - this->transform[2]), vec3(this->transform[1])+this->cameraOffset);
 }

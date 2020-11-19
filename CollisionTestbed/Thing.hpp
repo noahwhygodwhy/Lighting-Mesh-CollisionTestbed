@@ -46,7 +46,7 @@ class Thing : public IThing
 {
 	
 public:
-	Thing(Model m, Hitbox h, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), vec3 up = vec3(0, 0, 0), vec3 forward = vec3(0, 0, 0), ThingType = ThingType::THING);
+	Thing(Model m, Hitbox h, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
 	Thing();
 	~Thing();
 
@@ -64,13 +64,14 @@ public:
 	void rotateRelative(vec3 axis, float degrees);
 	void rotateAbsolute(vec3 axis, float degrees);
 	void rotateSet(vec3 rotation);
+	
+	vec3 getUp();
+	vec3 getForward();
 
 
 	//void impart force(..?);
 	ThingType type;
 	mat4 transform;
-	vec3 up;
-	vec3 forward;
 	//vec3 position;
 	//vec3 orientation; //TODO: maybe figure out quaternions...
 	vec3 velocity;

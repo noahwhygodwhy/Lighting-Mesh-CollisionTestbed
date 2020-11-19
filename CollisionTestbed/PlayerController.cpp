@@ -40,16 +40,17 @@ void PlayerController::mouseMoveCallback(GLFWwindow* window, double xpos, double
 }
 void PlayerController::tick(float deltaTime, GLFWwindow* window)
 {
-	vec2 direction = vec2(glfwGetKey(window, GLFW_KEY_W)- glfwGetKey(window, GLFW_KEY_S), glfwGetKey(window, GLFW_KEY_D)- glfwGetKey(window, GLFW_KEY_A));
-	printf("-direction: %f, %f\n", direction.x, direction.y);
+	vec2 direction = vec2(glfwGetKey(window, GLFW_KEY_S)- glfwGetKey(window, GLFW_KEY_W), glfwGetKey(window, GLFW_KEY_A)- glfwGetKey(window, GLFW_KEY_D));
 	vec2 newDirection = direction;
 	if (direction.x != 0 or direction.y !=0)
 	{
 		direction = glm::normalize(direction);
-		printf("direction: %f, %f\n", direction.x, direction.y);
 		vec2 trueForward = vec2(0, 1);
-		vec2 thingsFoward = normalize(vec2(this->thing->forward));
+		vec2 thingsFoward = normalize(vec2(this->thing->getForward().x, this->thing->getForward().z));
 		vec2 quoteoriginquote = vec2(0, 0);
+
+
+
 
 		vec2 norm1 = glm::normalize(trueForward - quoteoriginquote);
 		vec2 norm2 = glm::normalize(thingsFoward - quoteoriginquote);
@@ -64,8 +65,6 @@ void PlayerController::tick(float deltaTime, GLFWwindow* window)
 	{
 		newDirection = vec2(0.0f);
 	}
-
-	printf("transforming by %f, %f\n", newDirection.x, newDirection.y);
-	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.x, newDirection.y, 0));
+	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.x,0, newDirection.y));
 	
 }

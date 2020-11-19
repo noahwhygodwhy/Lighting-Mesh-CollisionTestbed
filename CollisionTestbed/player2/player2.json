@@ -1,0 +1,43 @@
+{
+	"type": "player",
+	"model": "player2.obj",
+	"positionOffset": {
+		"x": 0.0,
+		"y": 0.0,
+		"z": 0.0
+	},
+	"camera": {
+		"cameraOffset": {
+			"x": 0.0,
+			"y": 7.45,
+			"z": 0.0
+		},
+		"cameraVector": {
+			"x": 0.0,
+			"y": 0.0,
+			"z": 1.0
+		}
+	},
+	"gunPort": {
+		"gunportOffset": {
+			"x": -1.55,
+			"y": 7.45,
+			"z": 3.014
+		},
+		"gunportVector": {
+			"x": 0.0,
+			"y": 0.0,
+			"z": 1.0
+		}
+	},
+	"hitbox": {
+		"type": "Cylinder",
+		"origin": {
+			"x": 0.0,
+			"y": 0.0,
+			"z": 0.0
+		},
+		"radius": 2,
+		"height": 8.85
+	}
+}

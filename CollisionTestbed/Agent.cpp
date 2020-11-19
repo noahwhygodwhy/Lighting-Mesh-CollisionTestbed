@@ -1,6 +1,8 @@
 #include "Agent.hpp"
 #include <string>
-
+#include <glm/gtx/vector_angle.hpp>
+#include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtx/string_cast.hpp"
 //Agent will eventually have a controller of sorts?
 Agent::Agent(Model m,
 	Controller * c,
@@ -12,19 +14,15 @@ Agent::Agent(Model m,
 	vec3 position,
 	vec3 velocity,
 	vec3 orientation,
-	vec3 up,
-	vec3 forward,
 	ThingType thingtype)
-	:Thing(m, h, position, velocity, orientation, up, forward, thingtype)
+	:Thing(m, h, position, velocity, orientation, thingtype)
 { 
 	this->cameraOffset = cameraOffset;
 	this->cameraVector = cameraVector;
 	this->gunportOffset = gunportOffset;
 	this->gunportVector = gunportVector;
 	this->controller = c;
-	printf("id of controller for agent construtor: %i\n", this->controller->id);
 	this->controller->giveThing(this);
-	printf("id of controller for agent construtor2: %i\n", this->controller->id);
 	this->speed = 1.0;
 }
 
@@ -33,8 +31,11 @@ Controller* Agent::getController()
 	return this->controller;
 }
 
+
 Agent::Agent():Thing()
 {
+	this->controller = new Controller();
+	this->controller->giveThing(this);
 	this->cameraOffset = vec3(0);
 	this->cameraVector = vec3(0);
 	this->gunportOffset = vec3(0);

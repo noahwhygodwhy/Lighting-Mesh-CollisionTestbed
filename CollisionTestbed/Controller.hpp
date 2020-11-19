@@ -2,7 +2,6 @@
 #define CONTROLLER_H
 #include "Thing.hpp"
 
-static int num = 0;
 class Controller
 {
 public:
@@ -11,7 +10,6 @@ public:
 	void giveThing(Thing* thing);
 	void tick(float deltatime, GLFWwindow* window);
 	Thing* thing;
-	int id;
 private:
 	
 };

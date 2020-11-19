@@ -34,13 +34,11 @@ int main(void)
 	myFile << "THE FILE CONTESNTS";
 	myFile.close();
 	//Player* p = dynamic_cast<Player*>(jsonToThing("player1"));
-	void* p = jsonToThing("player1");
-	printf("finished json to thing\n");
-	Player* p2 = (Player*) p;
-	printf("converted\n");
+	Player* p = (Player*) jsonToThing("player2");
+	Agent* a = (Agent*)jsonToThing("agent1");
 	
-
-	r.setPlayer(p2);
+	r.addThing(a);
+	r.setPlayer(p);
 	printf("###running\n");
 	r.run();
 	printf("###ending\n");

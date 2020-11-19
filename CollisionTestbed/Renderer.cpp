@@ -1,5 +1,6 @@
 #include "Renderer.hpp"
 #include "Camera.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 
 float deltaTime = 0.0f;	// Time between current frame and last frame
@@ -31,22 +32,22 @@ void processInput(GLFWwindow* window, Camera& cam)
 	{
 		glfwSetWindowShouldClose(window, true);
 	}
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
 		//printf("W");
 		cam.keyboardInput(Direction::FORWARD, deltaTime);
 	}
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
 		//printf("S");
 		cam.keyboardInput(Direction::BACKWARD, deltaTime);
 	}
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
 		//printf("A");
 		cam.keyboardInput(Direction::LEFT, deltaTime);
 	}
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
 		//printf("D");
 		cam.keyboardInput(Direction::RIGHT, deltaTime);
@@ -165,15 +166,14 @@ void Renderer::run()
 		//processInput(this->window, cam);
 		shader.use();
 
-		
-		mat4 view = cam.getView();
+		player->tick(deltaTime, this->window);
+		player->draw(shader);
+		mat4 view = player->getView();
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
 		shader.setMatFour("view", view);
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
 		shader.setMatFour("projection", projection);
 
-		player->tick(deltaTime, this->window);
-		player->draw(shader);
 
 		for (auto t : things) //Everything else
 		{

@@ -16,8 +16,6 @@ public:
 		vec3 position = vec3(0, 0, 0),
 		vec3 velocity = vec3(0, 0, 0),
 		vec3 orientation = vec3(0, 0, 0),
-		vec3 up = vec3(0, 0, 0),
-		vec3 forward = vec3(0, 0, 0),
 		ThingType thingtype = ThingType::AGENT);
 	Agent();
 	~Agent();
@@ -25,14 +23,13 @@ public:
 	void tick(float deltaTime, GLFWwindow* window);
 	float getSpeed();
 	Controller* getController();
-
-private:
-	Controller* controller;
 	float speed;
 	vec3 cameraOffset;
 	vec3 cameraVector;
 	vec3 gunportOffset;
 	vec3 gunportVector;
+private:
+	Controller* controller;
 
 };
 #endif

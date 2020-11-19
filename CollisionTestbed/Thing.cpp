@@ -19,22 +19,35 @@
 
 using namespace std;
 using namespace nlohmann;
-Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, vec3 up, vec3 foward, ThingType type)
+Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
-	printf("making new thing\n");
 	this->model = m;
 	this->transform = mat4(1.0f);
-	cout << glm::to_string(this->transform) <<endl;
-	/*this->transform = glm::translate(this->transform, position);
+	this->transform = glm::translate(this->transform, position);
 	this->transform = glm::rotate(this->transform, radians(orientation.x), vec3(1, 0, 0));
-	this->transform = ::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
-	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(1, 0, 1));*/
+	this->transform = glm::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
+	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(0, 0, 1));
 	this->velocity = velocity;
 	this->type = type;
-	this->up = up;
-	this->forward = forward;
 }
 
+vec3 Thing::getUp()
+{
+	return vec3(this->transform[1][0], this->transform[1][1], this->transform[1][2]);
+}
+vec3 Thing::getForward()
+{
+	return -vec3(this->transform[2][0], this->transform[2][1], this->transform[2][2]);
+}
+/*fairly certain this are row major indexes, not column major as they shoudl be
+vec3 Thing::getUp()
+{
+	return vec3(this->transform[0][1], this->transform[1][1], this->transform[2][1]);
+}
+vec3 Thing::getForward()
+{
+	return -vec3(this->transform[0][2], this->transform[1][2], this->transform[2][2]);
+}*/
 
 Thing::Thing()
 {	
@@ -152,7 +165,6 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			printf("making a new agent\n");
 			return new Agent(model, new Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
 		}
 		else if (type == "player")
@@ -160,12 +172,12 @@ Thing* jsonToThing(string thingTitle)
 			vec3 cameraOffset = jsonToVec3(j["camera"]["cameraOffset"]);
 			vec3 cameraVector = jsonToVec3(j["camera"]["cameraVector"]);
 
+			printf("camera offset is %f, %f, %f\n", cameraOffset.x, cameraOffset.y, cameraOffset.z);
+
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			printf("making the player/controller\n");
 			Player* p = new Player(model, new PlayerController(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
-			printf("finished making player\n");
 			return p;
 		}
 		else if (type == "object")
