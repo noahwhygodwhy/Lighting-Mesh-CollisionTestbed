@@ -40,7 +40,8 @@ void PlayerController::mouseMoveCallback(GLFWwindow* window, double xpos, double
 }
 void PlayerController::tick(float deltaTime, GLFWwindow* window)
 {
-	vec2 direction = vec2(glfwGetKey(window, GLFW_KEY_S)- glfwGetKey(window, GLFW_KEY_W), glfwGetKey(window, GLFW_KEY_A)- glfwGetKey(window, GLFW_KEY_D));
+	vec2 direction = vec2(glfwGetKey(window, GLFW_KEY_W)- glfwGetKey(window, GLFW_KEY_S), glfwGetKey(window, GLFW_KEY_A)- glfwGetKey(window, GLFW_KEY_D));
+	
 	vec2 newDirection = direction;
 	if (direction.x != 0 or direction.y !=0)
 	{
@@ -48,9 +49,6 @@ void PlayerController::tick(float deltaTime, GLFWwindow* window)
 		vec2 trueForward = vec2(0, 1);
 		vec2 thingsFoward = normalize(vec2(this->thing->getForward().x, this->thing->getForward().z));
 		vec2 quoteoriginquote = vec2(0, 0);
-
-
-
 
 		vec2 norm1 = glm::normalize(trueForward - quoteoriginquote);
 		vec2 norm2 = glm::normalize(thingsFoward - quoteoriginquote);
@@ -65,6 +63,6 @@ void PlayerController::tick(float deltaTime, GLFWwindow* window)
 	{
 		newDirection = vec2(0.0f);
 	}
-	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.x,0, newDirection.y));
+	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.y,0, newDirection.x));
 	
 }

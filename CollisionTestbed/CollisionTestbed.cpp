@@ -5,6 +5,7 @@
 #include "Player.hpp"
 #include "Controller.hpp"
 #include "PlayerController.hpp"
+#include "Environment.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -36,6 +37,12 @@ int main(void)
 	//Player* p = dynamic_cast<Player*>(jsonToThing("player1"));
 	Player* p = (Player*) jsonToThing("player2");
 	Agent* a = (Agent*)jsonToThing("agent1");
+	Environment* e = (Environment*)jsonToThing("environment1");
+
+	//todo:
+	//modify jsonToThing to accept environments
+	//modify jsonTohitbox to accept objFile hitboxes
+	//implement a objFile hitbox...
 	
 	r.addThing(a);
 	r.setPlayer(p);

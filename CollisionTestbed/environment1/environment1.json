@@ -1,0 +1,13 @@
+{
+	"type": "environment",
+	"model": "environment1.obj",
+	"positionOffset": {
+		"x": 0.0,
+		"y": 0.0,
+		"z": 0.0
+	},
+	"hitbox": {
+		"type": "objFile",
+		"filename":"environment1.obj",
+	}
+}
