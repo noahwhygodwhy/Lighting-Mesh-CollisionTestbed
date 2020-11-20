@@ -28,6 +28,11 @@ Hitbox jsonToHitbox(json j)
 		vec3 origin = jsonToVec3(j["origin"]);
 		return CylinderHitbox(vec3(0), radius, height);
 	}
+	if (type == "objFile")
+	{
+		string filename = j["filename"];
+		return objHitbox(filename);
+	}
 
 	return Hitbox();
 	//TODO: ANY OTHER TYPE...i wish c++ supported reflection

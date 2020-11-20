@@ -6,7 +6,7 @@
 class RectHitbox : public PrimativeHitbox
 {
 public:
-	RectHitbox(vec3 origin, float x, float y, float z);
+	RectHitbox(vec3 origin, vec3 dims);
 	~RectHitbox();
 
 private:

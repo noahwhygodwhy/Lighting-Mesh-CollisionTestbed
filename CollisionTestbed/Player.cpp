@@ -9,14 +9,15 @@ Player::Player():Agent()
 
 Player::Player(Model m,
 	PlayerController* c,
-	Hitbox h,
+	vector<Hitbox> preciseHitbox,
+	Hitbox generalHitbox,
 	vec3 cameraOffset,
 	vec3 cameraVector,
 	vec3 gunportOffset,
 	vec3 gunportVector,
 	vec3 position,
 	vec3 velocity,
-	vec3 orientation) : Agent(m, c, h, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, ThingType::PLAYER)
+	vec3 orientation) : Agent(m, c, preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, ThingType::PLAYER)
 {
 }
 void Player::tick(float deltaTime, GLFWwindow* window)

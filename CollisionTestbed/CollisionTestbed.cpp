@@ -40,6 +40,7 @@ int main(void)
 	Environment* e = (Environment*)jsonToThing("environment1");
 
 	//todo:
+
 	//modify jsonToThing to accept environments
 	//modify jsonTohitbox to accept objFile hitboxes
 	//implement a objFile hitbox...

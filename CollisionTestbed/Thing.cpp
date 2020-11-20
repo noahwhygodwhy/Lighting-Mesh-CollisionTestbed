@@ -19,7 +19,7 @@
 
 using namespace std;
 using namespace nlohmann;
-Thing::Thing(Model m, Hitbox h, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
+Thing::Thing(Model m, vector<Hitbox> preciseHitbox, Hitbox generalHitbox, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
 	this->model = m;
 	this->transform = mat4(1.0f);
@@ -186,7 +186,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 		else if (type == "environment")
 		{
-			//if it's an environment, just make it
+			return new Environment(model, hitbox);
 		}
 		return new Thing();
 	}

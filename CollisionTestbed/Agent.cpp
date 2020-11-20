@@ -6,7 +6,8 @@
 //Agent will eventually have a controller of sorts?
 Agent::Agent(Model m,
 	Controller * c,
-	Hitbox h,
+	vector<Hitbox> preciseHitbox,
+	Hitbox generalHitbox,
 	vec3 cameraOffset,
 	vec3 cameraVector,
 	vec3 gunportOffset,
@@ -15,7 +16,7 @@ Agent::Agent(Model m,
 	vec3 velocity,
 	vec3 orientation,
 	ThingType thingtype)
-	:Thing(m, h, position, velocity, orientation, thingtype)
+	:Thing(m, preciseHitbox, generalHitbox, position, velocity, orientation, thingtype)
 { 
 	this->cameraOffset = cameraOffset;
 	this->cameraVector = cameraVector;
