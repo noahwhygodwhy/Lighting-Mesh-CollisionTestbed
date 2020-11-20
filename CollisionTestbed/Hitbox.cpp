@@ -1,5 +1,6 @@
 #include "Hitbox.hpp"
 #include "CylinderHitbox.hpp"
+#include "CuboidHitbox.hpp"
 Hitbox::Hitbox(vec3 origin)
 {
 	this->origin = origin;
@@ -26,12 +27,14 @@ Hitbox jsonToHitbox(json j)
 		float radius = j["radius"];
 		float height = j["height"];
 		vec3 origin = jsonToVec3(j["origin"]);
-		return CylinderHitbox(vec3(0), radius, height);
+		return CylinderHitbox(origin, radius, height);
 	}
-	if (type == "objFile")
+	if (type == "cuboid")
 	{
-		string filename = j["filename"];
-		return objHitbox(filename);
+		vec3 origin = jsonToVec3(j["origin"]);
+		vec3 dims = jsonToVec3(j["dims"]);
+		vec3 otherCorner = origin + dims;
+		return CuboidHitbox(origin, otherCorner);
 	}
 
 	return Hitbox();

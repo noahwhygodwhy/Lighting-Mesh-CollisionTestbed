@@ -23,8 +23,6 @@ public:
 
 private:
 	vec3 origin;
-	vec3 minDim;
-	vec3 maxDim;
 };
 
 vec3 jsonToVec3(json j);

@@ -153,7 +153,13 @@ Thing* jsonToThing(string thingTitle)
 
 		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
 
-		Hitbox hitbox = jsonToHitbox(j["hitbox"]); //TODO: implement hitbox type and jsontohitbox
+		Hitbox generalHitbox = jsonToHitbox(j["generalHitbox"]); //TODO: implement hitbox type and jsontohitbox
+		vector<Hitbox> preciseHitbox;
+		for (auto x : j["preciseHitbox"])
+		{
+			preciseHitbox.push_back(jsonToHitbox(x));
+		}
+
 
 		//TODO: later attributes might include weight, speed, interactability
 
@@ -165,7 +171,7 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			return new Agent(model, new Controller(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			return new Agent(model, new Controller(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
 		}
 		else if (type == "player")
 		{
@@ -177,7 +183,7 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			Player* p = new Player(model, new PlayerController(), hitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
 			return p;
 		}
 		else if (type == "object")
@@ -186,7 +192,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 		else if (type == "environment")
 		{
-			return new Environment(model, hitbox);
+			return new Environment(model, preciseHitbox, generalHitbox);
 		}
 		return new Thing();
 	}

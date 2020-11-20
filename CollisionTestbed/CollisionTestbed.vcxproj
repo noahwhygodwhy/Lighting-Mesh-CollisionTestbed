@@ -163,8 +163,7 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlllppHitbox.cpp" />
     <ClCompile Include="PlllppHitbox.hpp" />
-    <ClCompile Include="PrimativeHitbox.cpp" />
-    <ClCompile Include="RectHitbox.cpp" />
+    <ClCompile Include="CuboidHitbox.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Thing.cpp" />
@@ -185,8 +184,7 @@
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerController.hpp" />
-    <ClInclude Include="PrimativeHitbox.hpp" />
-    <ClInclude Include="RectHitbox.hpp" />
+    <ClInclude Include="CuboidHitbox.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="stb_image.h" />

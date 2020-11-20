@@ -1,4 +1,4 @@
-#ifndef P_HITBOX_H
+/*#ifndef P_HITBOX_H
 #define P_HITBOX_H
 
 #include <glm/glm.hpp>
@@ -21,4 +21,4 @@ private:
 	vec3 dims
 };
 
-#endif
+#endif*/
