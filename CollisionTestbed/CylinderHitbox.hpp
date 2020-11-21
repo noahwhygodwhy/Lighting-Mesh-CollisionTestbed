@@ -10,7 +10,7 @@ using namespace glm;
 class CylinderHitbox : public Hitbox
 {
 public:
-	CylinderHitbox(vec3 origin, float radius, float height);
+	CylinderHitbox(vec3 origin, float radius, float height, HitboxType type = HitboxType::CYLINDER);
 	~CylinderHitbox();
 	float height;
 	float radius;

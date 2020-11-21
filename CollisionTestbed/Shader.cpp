@@ -16,7 +16,7 @@ unsigned int makeVertexShader(string filename)
 {
     string vertexShaderSource = fileToString(filename);
     const GLchar* const numChar = vertexShaderSource.data();
-    printf("%s\n", vertexShaderSource.c_str());
+    //printf("%s\n", vertexShaderSource.c_str());
     unsigned int vertexShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &numChar, NULL);

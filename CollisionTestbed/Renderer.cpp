@@ -17,8 +17,8 @@ Renderer::Renderer(int x, int y)
 	VAO = 0;
 	screenX = x;
 	screenY = y;
-	cam = Camera(vec3(0, 0, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
 	window = glfwCreateWindow(x, y, "Title Goes here", NULL, NULL);
+	cam = Camera(vec3(0, 0, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
 }
 
 Renderer::~Renderer()
@@ -94,7 +94,12 @@ static void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 
 void Renderer::setPlayer(Player* p)
 {
+
 	this->player = p;
+	int width, height;
+	glfwGetWindowSize(this->window, &width, &height);
+	this->player->camera.changeWindowSize(vec2(width, height));
+	this->addThing(this->player);
 	glfwSetWindowUserPointer(this->window, this->player);
 	glfwSetKeyCallback(this->window, keyCallback);
 	glfwSetMouseButtonCallback(this->window, mouseButtCallback);
@@ -108,6 +113,7 @@ void Renderer::addThing(Thing* th)
 }
 void frameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
+	printf("######%#@%@#%@#new window size\n");
 	glViewport(0, 0, width, height);
 }
 
@@ -148,6 +154,8 @@ bool Renderer::initialize()
 	glEnable(GL_LINE_SMOOTH);
 	glLineWidth(2.0f);
 
+	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	return true;
 }
 void Renderer::run()
@@ -166,9 +174,7 @@ void Renderer::run()
 		//processInput(this->window, cam);
 		shader.use();
 
-		player->tick(deltaTime, this->window);
-		player->draw(shader);
-		mat4 view = player->getView();
+		mat4 view = this->player->getView();
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
 		shader.setMatFour("view", view);
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);
@@ -177,7 +183,7 @@ void Renderer::run()
 
 		for (auto t : things) //Everything else
 		{
-			t->tick(deltaTime);
+			t->tick(deltaTime, this->window);
 			t->draw(shader);
 		}
 		glfwSwapBuffers(this->window);

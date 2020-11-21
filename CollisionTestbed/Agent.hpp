@@ -9,7 +9,7 @@ public:
 	Agent(Model m, 
 		Controller * c,
 		vector<Hitbox> preciseHitbox,
-		Hitbox generalHitbox,
+		vector<Hitbox> generalHitbox,
 		vec3 cameraOffset = vec3(0, 0, 0),
 		vec3 cameraVector = vec3(0, 0, 1),
 		vec3 gunportOffset = vec3(0, 0, 0),

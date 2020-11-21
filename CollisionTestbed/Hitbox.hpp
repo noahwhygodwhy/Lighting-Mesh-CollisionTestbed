@@ -9,6 +9,13 @@
 #include <nlohmann/json.hpp>
 
 
+enum class HitboxType {
+	CUBOID,
+	CYLINDER,
+	PLLLPP,
+	PLAIN,
+};
+
 using namespace std;
 using namespace glm;
 using namespace nlohmann;
@@ -17,12 +24,12 @@ class Hitbox
 {
 public:
 	//constructor for cubes/cylinders, spheres, and basic shapes like that
-	Hitbox(vec3 origin);
+	Hitbox(vec3 origin, HitboxType type);
 	Hitbox();
 	~Hitbox();
-
-private:
 	vec3 origin;
+	HitboxType type;
+private:
 };
 
 vec3 jsonToVec3(json j);

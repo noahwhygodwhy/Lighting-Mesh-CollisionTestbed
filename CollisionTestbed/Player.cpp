@@ -10,7 +10,8 @@ Player::Player():Agent()
 Player::Player(Model m,
 	PlayerController* c,
 	vector<Hitbox> preciseHitbox,
-	Hitbox generalHitbox,
+	vector<Hitbox> generalHitbox,
+	Camera camera,
 	vec3 cameraOffset,
 	vec3 cameraVector,
 	vec3 gunportOffset,
@@ -34,6 +35,8 @@ PlayerController* Player::getController()
 
 mat4 Player::getView()
 {
+	return this->camera.getView();
+
 	vec3 up = vec3(0, 1, 0);
 	vec3 forward = vec3(0, 0, 1);
 

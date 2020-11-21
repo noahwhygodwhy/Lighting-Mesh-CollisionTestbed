@@ -31,6 +31,8 @@ class Camera
 	float mouseSensitivity;
 	float zoom;
 	float id;
+	float lastX;
+	float lastY;
 public:
 	Camera(vec3 initPos, vec3 initUp, float y, float p, float mvspd, float mouseSens, float zooooooom)
 	{
@@ -55,6 +57,12 @@ public:
 		zoom = 1;
 		updateVectors();
 	}
+	void changeWindowSize(vec2 windowSize)
+	{
+		lastX = windowSize.x / 2;
+		lastY = windowSize.y / 2;
+	}
+	void move(vec3 d);
 	void keyboardInput(Direction dir, float time);
 	void mouseInput(float x, float y, GLboolean cp);
 	void updateVectors();

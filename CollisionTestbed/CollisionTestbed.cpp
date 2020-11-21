@@ -9,18 +9,18 @@
 #include <iostream>
 #include <fstream>
 
+/*
 
+[RT.x] [UP.x] [BK.x] [POS.x]
+[RT.y] [UP.y] [BK.y] [POS.y]
+[RT.z] [UP.z] [BK.z] [POS.Z]
+[    ] [    ] [    ] [US   ]
+
+*/
 using namespace std;
 
 int main(void)
 {
-
-
-
-
-
-
-
 	printf("###starting\n");
 	Renderer r = Renderer(1920, 1080);
 	printf("###initializing\n");
@@ -44,7 +44,7 @@ int main(void)
 	//modify jsonToThing to accept environments
 	//modify jsonTohitbox to accept objFile hitboxes
 	//implement a objFile hitbox...
-	
+	r.addThing(e);
 	r.addThing(a);
 	r.setPlayer(p);
 	printf("###running\n");

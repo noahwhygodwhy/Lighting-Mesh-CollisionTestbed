@@ -7,7 +7,7 @@
 Agent::Agent(Model m,
 	Controller * c,
 	vector<Hitbox> preciseHitbox,
-	Hitbox generalHitbox,
+	vector<Hitbox> generalHitbox,
 	vec3 cameraOffset,
 	vec3 cameraVector,
 	vec3 gunportOffset,

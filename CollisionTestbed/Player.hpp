@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
+#include "Camera.hpp"
 
 class Player : public Agent
 {
@@ -13,7 +14,8 @@ public:
 	Player(Model m,
 		PlayerController* c,
 		vector<Hitbox> preciseHitbox,
-		Hitbox generalHitbox,
+		vector<Hitbox> generalHitbox,
+		Camera camera,
 		vec3 cameraOffset = vec3(0, 0, 0),
 		vec3 cameraVector = vec3(0, 0, 1),
 		vec3 gunportOffset = vec3(0, 0, 0),
@@ -26,6 +28,7 @@ public:
 	mat4 getView();
 	void tick(float deltaTime, GLFWwindow* window);
 	PlayerController* getController();
+	Camera camera;
 
 private:
 

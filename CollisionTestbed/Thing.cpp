@@ -19,7 +19,7 @@
 
 using namespace std;
 using namespace nlohmann;
-Thing::Thing(Model m, vector<Hitbox> preciseHitbox, Hitbox generalHitbox, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
+Thing::Thing(Model m, vector<Hitbox> preciseHitbox, vector<Hitbox> generalHitbox, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
 	this->model = m;
 	this->transform = mat4(1.0f);
@@ -64,7 +64,7 @@ Thing::~Thing()
 
 
 
-void Thing::tick(float deltaTime)
+void Thing::tick(float deltaTime, GLFWwindow* window)
 {
 	//move the object according to time
 }
@@ -129,9 +129,9 @@ Thing* jsonToThing(string thingTitle)
 	{
 		json j;
 		theFile >> j;
-		printf("%s\n", j.dump().c_str());
-		printf("the type is as follows:\n");
-		fflush(stdout);
+		//printf("%s\n", j.dump().c_str());
+		//printf("the type is as follows:\n");
+		//fflush(stdout);
 
 		//Everything will have at least these four
 		string type = j["type"];
@@ -150,15 +150,26 @@ Thing* jsonToThing(string thingTitle)
 		}
 
 
-
 		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
 
-		Hitbox generalHitbox = jsonToHitbox(j["generalHitbox"]); //TODO: implement hitbox type and jsontohitbox
+
+		//printf("starting hitboxes\n");
+		vector<Hitbox> generalHitbox;
+
+		for (auto x : j["generalHitbox"])
+		{
+			//printf("hitbox forloop\n");
+			generalHitbox.push_back(jsonToHitbox(x));
+		}
+
+		//printf("hitbox middle\n");
 		vector<Hitbox> preciseHitbox;
 		for (auto x : j["preciseHitbox"])
 		{
+			//printf("hitbox forloop\n");
 			preciseHitbox.push_back(jsonToHitbox(x));
 		}
+		//printf("ending hitbox\n");
 
 
 		//TODO: later attributes might include weight, speed, interactability
@@ -171,19 +182,19 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			return new Agent(model, new Controller(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			return new Agent(model, new Controller(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
 		}
 		else if (type == "player")
 		{
 			vec3 cameraOffset = jsonToVec3(j["camera"]["cameraOffset"]);
 			vec3 cameraVector = jsonToVec3(j["camera"]["cameraVector"]);
 
-			printf("camera offset is %f, %f, %f\n", cameraOffset.x, cameraOffset.y, cameraOffset.z);
+			//printf("camera offset is %f, %f, %f\n", cameraOffset.x, cameraOffset.y, cameraOffset.z);
 
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector);
+			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, Camera(positionOffset+cameraOffset, vec3(0), 0, 0, 10, 0.3, 1), cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
 			return p;
 		}
 		else if (type == "object")
@@ -192,7 +203,8 @@ Thing* jsonToThing(string thingTitle)
 		}
 		else if (type == "environment")
 		{
-			return new Environment(model, preciseHitbox, generalHitbox);
+			//printf("returning environment\n");
+			return new Environment(model, preciseHitbox, generalHitbox, positionOffset);
 		}
 		return new Thing();
 	}

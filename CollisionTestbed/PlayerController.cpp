@@ -1,10 +1,11 @@
 #include "PlayerController.hpp"
+#include "glm/glm.hpp"
 #include "glm/gtx/rotate_vector.hpp"
-#include <glm/gtx/string_cast.hpp>
+#include "glm/gtx/string_cast.hpp"
+#include "Player.hpp"
 
 PlayerController::PlayerController() : Controller()
 {
-	printf("player controller constructor\n");
 }
 
 PlayerController::~PlayerController()
@@ -36,7 +37,19 @@ void PlayerController::mouseButtCallback(GLFWwindow* window, int button, int act
 }
 void PlayerController::mouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
+	((Player*)this->thing)->camera.mouseInput(xpos, ypos, true);
+	this->thing->transform[0];
 
+	vec3 flatFront = -vec3(this->thing->transform[2][0], 0, this->thing->transform[2][2]);
+
+	vec3 right = normalize(cross(flatFront, vec3(0,1,0)));
+	vec3 up = normalize(cross(vec3(this->thing->transform[0]), flatFront));
+
+	this->thing->transform[0] = vec4(right, 0);
+	this->thing->transform[1] = vec4(up, 0);
+	this->thing->transform[2] = vec4(flatFront, 0);
+
+	//this->thing->transform = glm::rotate(this->thing->transform, (float) glm::radians(xpos/10000), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 void PlayerController::tick(float deltaTime, GLFWwindow* window)
 {
@@ -64,5 +77,6 @@ void PlayerController::tick(float deltaTime, GLFWwindow* window)
 		newDirection = vec2(0.0f);
 	}
 	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.y,0, newDirection.x));
+	((Player*)this->thing)->camera.move(vec3(newDirection.y, 0, newDirection.x));
 	
 }

@@ -1,9 +1,7 @@
 #ifndef PLAYER_CONTROLLER_H
 #define PLAYER_CONTROLLER_H
 
-#include <GLFW/glfw3.h>
 #include "Controller.hpp"
-//#include "Camera.hpp"
 
 
 class PlayerController : public Controller
@@ -15,6 +13,7 @@ public:
 	void mouseButtCallback(GLFWwindow* window, int button, int action, int mods);
 	void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
 	void tick(float deltaTime, GLFWwindow* window);
+	float aimPitch = 0;
 private:
 
 };

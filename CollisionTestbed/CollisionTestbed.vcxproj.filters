@@ -31,11 +31,11 @@
     <Filter Include="Header Files\Things">
       <UniqueIdentifier>{3490eaef-b17f-4678-8e8c-f1957ad3061b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Hitboxes">
-      <UniqueIdentifier>{0af5df87-7a38-48d7-8c1c-5503640a7c69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Hitboxes">
       <UniqueIdentifier>{30c131ad-30cd-4267-9e69-461e6931caa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Hitboxes">
+      <UniqueIdentifier>{0af5df87-7a38-48d7-8c1c-5503640a7c69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +99,9 @@
     <ClCompile Include="CuboidHitbox.cpp">
       <Filter>Source Files\Hitboxes</Filter>
     </ClCompile>
+    <ClCompile Include="HPS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.hpp">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="CuboidHitbox.hpp">
       <Filter>Header Files\Hitboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="HBS.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

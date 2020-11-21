@@ -1,7 +1,7 @@
 #include "Hitbox.hpp"
 #include "CylinderHitbox.hpp"
 #include "CuboidHitbox.hpp"
-Hitbox::Hitbox(vec3 origin)
+Hitbox::Hitbox(vec3 origin, HitboxType type)
 {
 	this->origin = origin;
 }

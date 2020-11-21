@@ -7,16 +7,15 @@
 using namespace std;
 using namespace glm;
 
+void Camera::move(vec3 d)
+{
+	position += d;
+	updateVectors();
+}
+
 void Camera::keyboardInput(Direction dir, float time)
 {
 	float vel = time * movementSpeed;
-	//printf("vel: %f\n", vel);
-	//printf("dir: %i\n", dir);
-	//printf("id: %f\n", id);
-	//printf("front: ");
-	//printVecThree(front);
-	//printf("position: ");
-	//printVecThree(position);
 	switch (dir)
 	{
 	case Direction::FORWARD:
@@ -53,8 +52,14 @@ void Camera::keyboardInput(Direction dir, float time)
 }
 void Camera::mouseInput(float x, float y, GLboolean cp = GL_TRUE)
 {
-	yaw += x * mouseSensitivity;
-	pitch += y * mouseSensitivity;
+	float changeX = lastX - x;
+	//printf("changeX:%f\n", changeX);
+	float changeY = lastY - y;
+	lastX = x;
+	lastY = y;
+
+	yaw += -changeX * mouseSensitivity;
+	pitch += changeY * mouseSensitivity;
 
 	if (cp)
 	{

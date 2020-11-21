@@ -11,7 +11,7 @@
 class PlllppHitbox : public Hitbox
 {
 public:
-	PlllppHitbox(vec3 origin, vec3 a, vec3 b, vec3 c);
+	PlllppHitbox(vec3 origin, vec3 a, vec3 b, vec3 c, HitboxType type = HitboxType::PLLLPP);
 	~PlllppHitbox();
 
 private:
