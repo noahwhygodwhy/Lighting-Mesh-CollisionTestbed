@@ -24,7 +24,7 @@ Camera::Camera(vec3 initPos, vec3 initUp, float yaw, float pitch, float mvspd, f
 	movementSpeed = mvspd;
 	mouseSensitivity = mouseSens;
 	zoom = zooooooom;
-	updateVectors();
+	//updateVectors();
 	//printf("init p:%s\n", glm::to_string(this->transform).c_str());
 	//this->id = asdfasdf++;
 	//printf("id: %i\n", this->id);
@@ -39,7 +39,7 @@ Camera::Camera()
 	movementSpeed = 1;
 	mouseSensitivity = 1;
 	zoom = 1;
-	updateVectors();
+	//updateVectors();
 }
 
 
