@@ -18,7 +18,7 @@ Renderer::Renderer(int x, int y)
 	screenX = x;
 	screenY = y;
 	window = glfwCreateWindow(x, y, "Title Goes here", NULL, NULL);
-	cam = Camera(vec3(0, 0, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
+	//cam = Camera(vec3(0, 5, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
 }
 
 Renderer::~Renderer()
@@ -26,51 +26,11 @@ Renderer::~Renderer()
 }
 
 
-void processInput(GLFWwindow* window, Camera& cam)
+void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
-	}
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		//printf("W");
-		cam.keyboardInput(Direction::FORWARD, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		//printf("S");
-		cam.keyboardInput(Direction::BACKWARD, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-	{
-		//printf("A");
-		cam.keyboardInput(Direction::LEFT, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-	{
-		//printf("D");
-		cam.keyboardInput(Direction::RIGHT, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-	{
-		//printf("D");
-		cam.keyboardInput(Direction::DOWN, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		//printf("D");
-		cam.keyboardInput(Direction::UP, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-	{
-		//printf("E");
-		cam.keyboardInput(Direction::YAW_RIGHT, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-	{
-		//printf("Q");
-		cam.keyboardInput(Direction::YAW_LEFT, deltaTime);
 	}
 }
 
@@ -96,10 +56,12 @@ void Renderer::setPlayer(Player* p)
 {
 
 	this->player = p;
-	int width, height;
-	glfwGetWindowSize(this->window, &width, &height);
-	this->player->camera.changeWindowSize(vec2(width, height));
+	//int width, height;
+	//glfwGetWindowSize(this->window, &width, &height);
+	//this->player->camera.changeWindowSize(vec2(width, height));
 	this->addThing(this->player);
+
+
 	glfwSetWindowUserPointer(this->window, this->player);
 	glfwSetKeyCallback(this->window, keyCallback);
 	glfwSetMouseButtonCallback(this->window, mouseButtCallback);
@@ -171,8 +133,14 @@ void Renderer::run()
 
 
 
-		//processInput(this->window, cam);
+		processInput(this->window);
 		shader.use();
+
+		for (auto t : things) //Everything else
+		{
+			t->tick(deltaTime, this->window);
+			t->draw(shader);
+		}
 
 		mat4 view = this->player->getView();
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
@@ -181,11 +149,6 @@ void Renderer::run()
 		shader.setMatFour("projection", projection);
 
 
-		for (auto t : things) //Everything else
-		{
-			t->tick(deltaTime, this->window);
-			t->draw(shader);
-		}
 		glfwSwapBuffers(this->window);
 		glfwPollEvents();
 	}

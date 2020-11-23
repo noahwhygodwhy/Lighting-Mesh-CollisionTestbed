@@ -8,6 +8,7 @@
 #include "Environment.hpp"
 #include <iostream>
 #include <fstream>
+#include "glm/gtx/string_cast.hpp"
 
 /*
 
@@ -36,7 +37,7 @@ int main(void)
 	myFile.close();
 	//Player* p = dynamic_cast<Player*>(jsonToThing("player1"));
 	Player* p = (Player*) jsonToThing("player2");
-	Agent* a = (Agent*)jsonToThing("agent1");
+	//Agent* a = (Agent*)jsonToThing("agent1");
 	Environment* e = (Environment*)jsonToThing("environment1");
 
 	//todo:
@@ -45,7 +46,7 @@ int main(void)
 	//modify jsonTohitbox to accept objFile hitboxes
 	//implement a objFile hitbox...
 	r.addThing(e);
-	r.addThing(a);
+	//r.addThing(a);
 	r.setPlayer(p);
 	printf("###running\n");
 	r.run();

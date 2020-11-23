@@ -182,7 +182,7 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			return new Agent(model, new Controller(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
+			return new Agent(model, new Controller(), preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset, vec3(0, 4, 0));
 		}
 		else if (type == "player")
 		{
@@ -194,7 +194,10 @@ Thing* jsonToThing(string thingTitle)
 			vec3 gunportOffset = jsonToVec3(j["gunPort"]["gunportOffset"]);
 			vec3 gunportVector = jsonToVec3(j["gunPort"]["gunportVector"]);
 			//if it's an agent, will have a gunport and a camera
-			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, Camera(positionOffset+cameraOffset, vec3(0), 0, 0, 10, 0.3, 1), cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
+			Camera c = Camera(cameraOffset, vec3(0, 1, 0), 0, 0, 10, 0.3, 1);
+			printf("added player %s\n", glm::to_string(c.transform).c_str());
+
+			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, c, cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
 			return p;
 		}
 		else if (type == "object")
@@ -204,7 +207,7 @@ Thing* jsonToThing(string thingTitle)
 		else if (type == "environment")
 		{
 			//printf("returning environment\n");
-			return new Environment(model, preciseHitbox, generalHitbox, positionOffset);
+			return new Environment(model, preciseHitbox, generalHitbox);
 		}
 		return new Thing();
 	}

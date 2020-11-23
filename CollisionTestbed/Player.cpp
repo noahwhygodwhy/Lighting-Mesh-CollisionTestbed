@@ -20,6 +20,7 @@ Player::Player(Model m,
 	vec3 velocity,
 	vec3 orientation) : Agent(m, c, preciseHitbox, generalHitbox, cameraOffset, cameraVector, gunportOffset, gunportVector, position, velocity, orientation, ThingType::PLAYER)
 {
+	this->camera = camera;
 }
 void Player::tick(float deltaTime, GLFWwindow* window)
 {
@@ -35,8 +36,8 @@ PlayerController* Player::getController()
 
 mat4 Player::getView()
 {
-	return this->camera.getView();
-
+	return this->camera.getView(this->transform);
+	/*
 	vec3 up = vec3(0, 1, 0);
 	vec3 forward = vec3(0, 0, 1);
 
@@ -56,4 +57,5 @@ mat4 Player::getView()
 
 
 	return glm::lookAt(vec3(cameraTransform[3]), vec3(cameraTransform[3] - cameraTransform[2]), vec3(cameraTransform[1]));
+	*/
 }

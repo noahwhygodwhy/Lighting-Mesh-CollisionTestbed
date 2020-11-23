@@ -14,6 +14,10 @@ public:
 	void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
 	void tick(float deltaTime, GLFWwindow* window);
 	float aimPitch = 0;
+	float lastX;
+	float lastY;
+	float mouseSensitivity = 1;
+
 private:
 
 };

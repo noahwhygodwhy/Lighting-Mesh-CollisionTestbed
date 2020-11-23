@@ -17,57 +17,40 @@ using namespace glm;
 
 class Camera
 {
+
+	// Euler Angles
+public:
+	mat4 transform;
+
 	vec3 position;
 	vec3 front;
 	vec3 right;
 	vec3 up;
 	vec3 worldUp;
-
-	// Euler Angles
 	float yaw;
 	float pitch;
 	// Camera options
 	float movementSpeed;
 	float mouseSensitivity;
 	float zoom;
-	float id;
-	float lastX;
-	float lastY;
-public:
-	Camera(vec3 initPos, vec3 initUp, float y, float p, float mvspd, float mouseSens, float zooooooom)
+	float lastX = 69.696969;
+	float lastY = 69.696969;
+	//int id;
+
+	Camera(vec3 initPos, vec3 initUp, float y, float p, float mvspd, float mouseSens, float zooooooom);
+	Camera();
+
+	void changeWindowSize(fvec2 windowSize)
 	{
-		position = initPos;
-		worldUp = initUp;
-		yaw = y;
-		pitch = p;
-		movementSpeed = mvspd;
-		mouseSensitivity = mouseSens;
-		zoom = zooooooom;
-		id = glfwGetTime();
-		updateVectors();
+		printf("chaing window size to %f,%f\n", windowSize.x, windowSize.y);
+		lastX = ((float)windowSize.x) / 2;
+		lastY = ((float)windowSize.y) / 2;
+
 	}
-	Camera()
-	{
-		position = vec3(0, 0, 0);
-		worldUp = vec3(0, 1, 0);
-		yaw = 0;
-		pitch = 0;
-		movementSpeed = 1;
-		mouseSensitivity = 1;
-		zoom = 1;
-		updateVectors();
-	}
-	void changeWindowSize(vec2 windowSize)
-	{
-		lastX = windowSize.x / 2;
-		lastY = windowSize.y / 2;
-	}
-	void move(vec3 d);
-	void keyboardInput(Direction dir, float time);
+	//void keyboardInput(Direction dir, float time);
 	void mouseInput(float x, float y, GLboolean cp);
 	void updateVectors();
-	mat4 getView();
-	float getId();
+	mat4 getView(mat4 parentTransform);
 
 };
 

@@ -28,7 +28,7 @@ private:
 	unsigned int largeTextureStack = 0;
 	int screenX;
 	int screenY;
-	Camera cam;
+	//Camera cam;
 	Shader shader;
 	GLFWwindow* window;
 	unsigned int VBO, VAO, EBO;
