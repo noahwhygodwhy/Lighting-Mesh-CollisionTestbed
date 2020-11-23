@@ -99,7 +99,7 @@
     <ClCompile Include="CuboidHitbox.cpp">
       <Filter>Source Files\Hitboxes</Filter>
     </ClCompile>
-    <ClCompile Include="HPS.cpp">
+    <ClCompile Include="HBS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
