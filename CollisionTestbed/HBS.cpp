@@ -8,6 +8,6 @@ void handleHits(vector<IThing*> things)
 		for (int j = i + 1; j < things.size(); j++)//for each other thing to that thing that hasn't already been done
 		{
 			for(auto hb1 : things.at(i).)
-		}
+		} 
 	}
 }
