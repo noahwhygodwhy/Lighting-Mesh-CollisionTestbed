@@ -46,7 +46,8 @@ Camera::Camera()
 mat4 Camera::getView(mat4 parentTransform)
 {
 	mat4 t = parentTransform * this->transform;
-	return glm::lookAt(vec3(t[3]), vec3(t[3]) - vec3(t[2]), vec3(t[1]));
+	mat4 la =  glm::lookAt(vec3(t[3]), vec3(t[3]) - vec3(t[2]), vec3(t[1]));
+	return la;
 }
 
 void Camera::mouseInput(float xpos, float ypos, GLboolean cp)

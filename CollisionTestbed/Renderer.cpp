@@ -138,8 +138,8 @@ void Renderer::run()
 
 		for (auto t : things) //Everything else
 		{
-			t->tick(deltaTime, this->window);
-			t->draw(shader);
+			t->draw(shader); //the order of these two infuriates me, but it doesn't work
+			t->tick(deltaTime, this->window); //the other way around :|
 		}
 
 		mat4 view = this->player->getView();

@@ -30,36 +30,21 @@ void PlayerController::mouseMoveCallback(GLFWwindow* window, double xpos, double
 
 void PlayerController::tick(float deltaTime, GLFWwindow* window)
 {
+	//printf("player controller tick\n");
 	double xpos;
 	double ypos;
 
 	glfwGetCursorPos(window, &xpos, &ypos);
 
-	xpos = xpos / 5000;
-	ypos = ypos / 5000;
+	xpos = xpos / 2000;
+	ypos = ypos / 2000;
 	this->thing->transform = glm::rotate(this->thing->transform, (float)(this->lastX - xpos), vec3(0, 1, 0));
-
+	((Player*)this->thing)->camera.transform = glm::rotate(((Player*)this->thing)->camera.transform, (float)(this->lastY - ypos), vec3(1, 0, 0));
 	lastX = xpos;
 	lastY = ypos;
 
+
 	vec2 direction = vec2(glfwGetKey(window, GLFW_KEY_D)- glfwGetKey(window, GLFW_KEY_A), glfwGetKey(window, GLFW_KEY_W) - glfwGetKey(window, GLFW_KEY_S));
-	
-	//printf("forward, %f, %f, %f\n", this->thing->getForward().x, this->thing->getForward().y, this->thing->getForward().z);
-	vec2 newDirection = vec3(0.0f);
-	if (direction.x != 0 or direction.y !=0)
-	{
-		direction = glm::normalize(direction);
-		vec2 trueForward = vec2(0, 1);
-		vec2 thingsFoward = normalize(vec2(this->thing->getForward().x, this->thing->getForward().z));
-		vec2 quoteoriginquote = vec2(0, 0);
-
-		vec2 norm1 = glm::normalize(trueForward - quoteoriginquote);
-		vec2 norm2 = glm::normalize(thingsFoward - quoteoriginquote);
-		float theDot = glm::dot(norm1, norm2);
-		float angleRads = glm::acos(theDot);
-
-		newDirection = glm::rotate(direction, angleRads);
-	}
-
-	this->thing->transform = glm::translate(this->thing->transform, vec3(newDirection.y,0, newDirection.x));
+	this->thing->transform = glm::translate(this->thing->transform, vec3(direction.x, 0, -direction.y));
+	//printf("%s\n", glm::to_string(this->thing->transform).c_str());
 }
