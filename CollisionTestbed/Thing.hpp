@@ -69,11 +69,8 @@ public:
 	vec3 getForward();
 
 
-	//void impart force(..?);
 	ThingType type;
 	mat4 transform;
-	//vec3 position;
-	//vec3 orientation; //TODO: maybe figure out quaternions...
 	vec3 velocity;
 	vec3 spinAxis;
 	float spinRate;
