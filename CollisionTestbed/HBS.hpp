@@ -1,4 +1,4 @@
 #include <vector>
 #include "Thing.hpp"
 
-void handleHits(vector<IThing*> things); 
+void handleHits(vector<IThing*> things, IThing* specificThing);

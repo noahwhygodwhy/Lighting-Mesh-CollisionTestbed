@@ -3,12 +3,19 @@
 #include "CuboidHitbox.hpp"
 #include "CylinderHitbox.hpp"
 
-void handleHits(vector<IThing*> things)
+void handleHits(vector<IThing*> things, IThing* specificThing)
 {
 
 	//definetly optimize better later^tm
 	vector<pair<Thing*, Thing*>> maybeTouching;
 	vec3 dump;
+
+	vec3 maxs = ((Thing*)specificThing)->getMaxs();//TODO:
+	vec3 mins = ((Thing*)specificThing)->getMins();
+
+
+
+
 	for (int i = 0; i < things.size(); i++)//for each thing
 	{
 		for (int j = i + 1; j < things.size(); j++)//for each other thing to that thing that hasn't already been done
@@ -60,25 +67,28 @@ bool cuboidAndCuboid(CuboidHitbox hb1, CuboidHitbox hb2, vec3* correction)
 
 bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
 {
-	int hbt = (int) hb1.type && (int) hb2.type;
+	int hbt = (int) hb1.type & (int) hb2.type;
 
-	if (hbt && (int)HitboxType::CUBOID)
+	if (hbt & (int)HitboxType::CUBOID)
 	{
-		if (hbt && (int)HitboxType::PLAIN)
+		if (hbt & (int)HitboxType::PLAIN)
 		{
 
 		}
-		if (hbt && (int)HitboxType::CYLINDER)
+		if (hbt & (int)HitboxType::CYLINDER)
 		{
-			return cuboidAndCylinder(*(CuboidHitbox*)&hb1, *(CylinderHitbox*)&hb1, correction);
+			if ((int)hb1.type & (int)HitboxType::CUBOID)
+				return cuboidAndCylinder(*(CuboidHitbox*)&hb1, *(CylinderHitbox*)&hb2, correction);
+			return cuboidAndCylinder(*(CuboidHitbox*)&hb2, *(CylinderHitbox*)&hb1, correction);
+				
 		}
-		if (hbt && (int)HitboxType::PLLLPP)
+		if (hbt & (int)HitboxType::PLLLPP)
 		{
 
 		}
 		else //both cuboids
 		{
-			return cuboidAndCuboid(*(CuboidHitbox*)&hb1, *(CuboidHitbox*)&hb1, correction);
+			return cuboidAndCuboid(*(CuboidHitbox*)&hb1, *(CuboidHitbox*)&hb2, correction);
 		}
 	}
 	return false;
