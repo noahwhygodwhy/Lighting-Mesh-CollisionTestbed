@@ -34,7 +34,7 @@
     <Filter Include="Header Files\Hitboxes">
       <UniqueIdentifier>{0af5df87-7a38-48d7-8c1c-5503640a7c69}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Hitboxes\OGLS">
+    <Filter Include="Header Files\OGLS">
       <UniqueIdentifier>{2df7ec6c-46ce-4033-bbca-8d1b8b81875c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -123,28 +123,28 @@
       <Filter>Header Files\Things</Filter>
     </ClInclude>
     <ClInclude Include="Camera.hpp">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="DirectionEnum.h">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="glad.h">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="GLSLReader.h">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="khrplatform.h">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.hpp">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="Shader.hpp">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
-      <Filter>Header Files\Hitboxes\OGLS</Filter>
+      <Filter>Header Files\OGLS</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
       <Filter>Header Files\Things</Filter>

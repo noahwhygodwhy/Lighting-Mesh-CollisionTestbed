@@ -18,6 +18,9 @@ bool generalArea(vec3 origMax, vec3 origMin, vec3 otherMax, vec3 otherMin)
 
 
 
+//TODO: IT"S NOT HANDLING ROTATED CUBOIDS :|||||||||||||||||||||||||||||||||||
+
+
 void handleHits(vector<IThing*> things, IThing* specificThing)
 {
 
@@ -105,9 +108,21 @@ bool cuboidAndCylinder(CuboidHitbox hb1, CylinderHitbox hb2, vec3* correction)
 {
 	vec3 circleCenter = hb2.origin;
 	
-	if (getDistance(hb1.origin.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) > hb2.radius)
+	if (getDistance(hb1.origin.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
+		getDistance(hb1.otherCorner.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
+		getDistance(hb1.origin.x, hb1.otherCorner.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
+		getDistance(hb1.otherCorner.x, hb1.otherCorner.z, hb2.origin.x, hb2.origin.z) < hb2.radius)
 	{
-
+		if (hb1.otherCorner.y < hb2.origin.y || hb1.origin.y >(hb2.origin.y + hb2.height))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+			//it's colliding, by how much, that's for you to find out
+		}
+		//we know x/z is in, now just check y;
 	}
 	
 
