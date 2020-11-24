@@ -10,10 +10,10 @@
 
 
 enum class HitboxType {
-	CUBOID,
-	CYLINDER,
-	PLLLPP,
-	PLAIN,
+	PLAIN = 1<<0,
+	CUBOID = 1<<1,
+	CYLINDER = 1<<2,
+	PLLLPP = 1<<3,
 };
 
 using namespace std;

@@ -1,6 +1,7 @@
 #include "HBS.hpp"
 
 #include "CuboidHitbox.hpp"
+#include "CylinderHitbox.hpp"
 
 void handleHits(vector<IThing*> things)
 {
@@ -31,22 +32,55 @@ void handleHits(vector<IThing*> things)
 			}
 		} 
 	}
+	for (pair<Thing*, Thing*> things : maybeTouching)
+	{
+		for (auto hb1 : ((Thing*)things.first)->preciseHitbox)
+		{
+
+		}
+	}
 }
 
 
 
 
 
+
+
+
+bool cuboidAndCylinder(CuboidHitbox hb1, CylinderHitbox hb2, vec3* correction)
+{
+
+}
+
+bool cuboidAndCuboid(CuboidHitbox hb1, CuboidHitbox hb2, vec3* correction)
+{
+	//i would really read the book before starting
+}
+
 bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
 {
-	if (hb1.type == hb2.type)
-	{
-		
-	}
+	int hbt = (int) hb1.type && (int) hb2.type;
 
-	if (hb1.type == HitboxType::CUBOID & hb2.type == HitboxType::CUBOID) 
+	if (hbt && (int)HitboxType::CUBOID)
 	{
-		CuboidHitbox chb1 = *(CuboidHitbox*)&hb1;
-		CuboidHitbox chb2 = *(CuboidHitbox*)&hb2;
+		if (hbt && (int)HitboxType::PLAIN)
+		{
+
+		}
+		if (hbt && (int)HitboxType::CYLINDER)
+		{
+			return cuboidAndCylinder(*(CuboidHitbox*)&hb1, *(CylinderHitbox*)&hb1, correction);
+		}
+		if (hbt && (int)HitboxType::PLLLPP)
+		{
+
+		}
+		else //both cuboids
+		{
+			return cuboidAndCuboid(*(CuboidHitbox*)&hb1, *(CuboidHitbox*)&hb1, correction);
+		}
 	}
+	return false;
+	//TODO: eventually this will have to include how to handle all of the types of hitboxes. Is there a better way of doing this besides each pairs?
 }
