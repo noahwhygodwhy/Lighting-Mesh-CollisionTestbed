@@ -3,47 +3,86 @@
 #include "CuboidHitbox.hpp"
 #include "CylinderHitbox.hpp"
 
+
+
+bool generalArea(vec3 origMax, vec3 origMin, vec3 otherMax, vec3 otherMin)
+{
+	if (origMax.x < otherMin.x) return false;
+	if (origMin.x > otherMax.x) return false;
+	if (origMax.y < otherMin.y) return false;
+	if (origMin.y > otherMax.y) return false;
+	if (origMax.z < otherMin.z) return false;
+	if (origMin.z > otherMax.z) return false;
+	return true;
+}
+
+
+
 void handleHits(vector<IThing*> things, IThing* specificThing)
 {
 
 	//definetly optimize better later^tm
-	vector<pair<Thing*, Thing*>> maybeTouching;
 	vec3 dump;
 
 	vec3 maxs = ((Thing*)specificThing)->getMaxs();//TODO:
 	vec3 mins = ((Thing*)specificThing)->getMins();
 
+	vector<IThing*> generalAreaThings;
 
-
-
-	for (int i = 0; i < things.size(); i++)//for each thing
+	//create a list of general area things
+	for (int i = 0; i < things.size(); i++)
 	{
-		for (int j = i + 1; j < things.size(); j++)//for each other thing to that thing that hasn't already been done
+		vec3 thingmaxs = ((Thing*)things.at(i))->getMaxs();
+		vec3 thingmins = ((Thing*)things.at(i))->getMins();
+		if (generalArea(maxs, mins, thingmaxs, thingmins))
 		{
-			bool shouldBreak = false;
-			for (auto hb1 : ((Thing*)things.at(i))->generalHitbox) //for each hitbox in the first thing
+			generalAreaThings.push_back(things.at(i));
+		}
+	}
+
+	//create a list of maybe touching things
+	vector<IThing*> maybeTouching;
+	for (int i = 0; i < things.size(); i++)
+	{
+		bool shouldBreak = false;
+		for (auto hb1 : ((Thing*)things.at(i))->generalHitbox) //for each hitbox in the first thing
+		{
+			if (shouldBreak)
 			{
-				if (shouldBreak)
+				break;
+			}
+			for (auto hb2 : ((Thing*)specificThing)->generalHitbox) //for each hitbox in the second thing
+			{
+				if (coliding(hb1, hb2, &dump))
 				{
+					maybeTouching.push_back(things.at(i));
+					shouldBreak = true;
 					break;
 				}
-				for (auto hb2 : ((Thing*)things.at(j))->generalHitbox) //for each hitbox in the second thing
+			}
+		}
+	}
+	//create a list of definitely touching things, and find out by how much
+	vec3 byHowMuch;
+	for (IThing* mtThing : maybeTouching)
+	{
+		bool shouldBreak = false;
+		for (auto hb1 : ((Thing*)mtThing)->generalHitbox) //for each hitbox in the first thing
+		{
+			if (shouldBreak)
+			{
+				break;
+			}
+			for (auto hb2 : ((Thing*)specificThing)->generalHitbox) //for each hitbox in the second thing
+			{
+				if (coliding(hb1, hb2, &byHowMuch))
 				{
-					if (coliding(hb1, hb2, &dump))
-					{
-						maybeTouching.push_back(pair((Thing*)things.at(i), (Thing*)things.at(j)));
-						shouldBreak = true;
-						break;
-					}
+					printf("THEY'RE COLLIDING\n");
+					//TODO:make the correction
+					shouldBreak = true;
+					break;
 				}
 			}
-		} 
-	}
-	for (pair<Thing*, Thing*> things : maybeTouching)
-	{
-		for (auto hb1 : ((Thing*)things.first)->preciseHitbox)
-		{
-
 		}
 	}
 }
@@ -54,15 +93,37 @@ void handleHits(vector<IThing*> things, IThing* specificThing)
 
 
 
+float getDistance(float x1, float y1, float x2, float y2)
+{
+	float diffx = x1 - x2;
+	float diffy = y1 - y2;
+	return sqrt((diffx * diffx) + (diffy * diffy));
+
+}
 
 bool cuboidAndCylinder(CuboidHitbox hb1, CylinderHitbox hb2, vec3* correction)
 {
+	vec3 circleCenter = hb2.origin;
+	
+	if (getDistance(hb1.origin.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) > hb2.radius)
+	{
 
+	}
+	
+
+	return false;
 }
 
 bool cuboidAndCuboid(CuboidHitbox hb1, CuboidHitbox hb2, vec3* correction)
 {
-	//i would really read the book before starting
+	if (hb1.otherCorner.x < hb2.origin.x) return false;
+	if (hb1.origin.x > hb2.otherCorner.x) return false;
+	if (hb1.otherCorner.y < hb2.origin.y) return false;
+	if (hb1.origin.y > hb2.otherCorner.y) return false;
+	if (hb1.otherCorner.z < hb2.origin.z) return false;
+	if (hb1.origin.z > hb2.otherCorner.z) return false;
+	//TODO: need to calculate correction
+	return true;
 }
 
 bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
