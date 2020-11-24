@@ -6,8 +6,8 @@
 //Agent will eventually have a controller of sorts?
 Agent::Agent(Model m,
 	Controller * c,
-	vector<Hitbox> preciseHitbox,
-	vector<Hitbox> generalHitbox,
+	vector<Hitbox*> preciseHitbox,
+	vector<Hitbox*> generalHitbox,
 	vec3 cameraOffset,
 	vec3 cameraVector,
 	vec3 gunportOffset,

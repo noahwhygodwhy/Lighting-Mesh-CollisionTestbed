@@ -9,8 +9,8 @@ Player::Player():Agent()
 
 Player::Player(Model m,
 	PlayerController* c,
-	vector<Hitbox> preciseHitbox,
-	vector<Hitbox> generalHitbox,
+	vector<Hitbox*> preciseHitbox,
+	vector<Hitbox*> generalHitbox,
 	Camera camera,
 	vec3 cameraOffset,
 	vec3 cameraVector,

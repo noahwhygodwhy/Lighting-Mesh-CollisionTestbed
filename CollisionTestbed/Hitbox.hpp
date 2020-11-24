@@ -29,10 +29,12 @@ public:
 	~Hitbox();
 	vec3 origin;
 	HitboxType type;
+	vec3 getMaxs();
+	vec3 getMins();
 private:
 };
 
 vec3 jsonToVec3(json j);
-Hitbox jsonToHitbox(json j);
+Hitbox* jsonToHitbox(json j);
 
 #endif

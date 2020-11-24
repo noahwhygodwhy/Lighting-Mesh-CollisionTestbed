@@ -46,7 +46,7 @@ class Thing : public IThing
 {
 	
 public:
-	Thing(Model m, vector<Hitbox> preciseHitbox, vector<Hitbox> generalHitbox, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
+	Thing(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*> generalHitbox, vec3 position = vec3(0, 0, 0), vec3 velocity = vec3(0, 0, 0), vec3 orientation = vec3(0, 0, 0), ThingType = ThingType::THING);
 	Thing();
 	~Thing();
 
@@ -76,9 +76,10 @@ public:
 	float spinRate;
 	int weight;//? idk how to calculate that but i'll figure it out.
 
-	vector<Hitbox> preciseHitbox;
-	vector<Hitbox> generalHitbox;
-
+	vector<Hitbox*> preciseHitbox;
+	vector<Hitbox*> generalHitbox;
+	vec3 maxs;
+	vec3 mins;
 
 	Model getModel();
 private:

@@ -19,16 +19,29 @@
 
 using namespace std;
 using namespace nlohmann;
-Thing::Thing(Model m, vector<Hitbox> preciseHitbox, vector<Hitbox> generalHitbox, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
+Thing::Thing(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*> generalHitbox, vec3 position, vec3 velocity, vec3 orientation, ThingType type)
 {
 	this->model = m;
 	this->transform = mat4(1.0f);
+	this->preciseHitbox = preciseHitbox;
+	this->generalHitbox = generalHitbox;
+	calculateExtremes(preciseHitbox, &this->maxs, &this->mins);
 	this->transform = glm::translate(this->transform, position);
 	this->transform = glm::rotate(this->transform, radians(orientation.x), vec3(1, 0, 0));
 	this->transform = glm::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
 	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(0, 0, 1));
 	this->velocity = velocity;
 	this->type = type;
+}
+
+
+void calculateExtremes(vector<Hitbox*> hbs, vec3* maxs, vec3* mins)
+{
+	for (Hitbox* hb : hbs)
+	{
+		*maxs = glm::max(*maxs, hb->getMaxs());
+		*maxs = glm::min(*maxs, hb->getMins());
+	}
 }
 
 vec3 Thing::getUp()
@@ -154,7 +167,7 @@ Thing* jsonToThing(string thingTitle)
 
 
 		//printf("starting hitboxes\n");
-		vector<Hitbox> generalHitbox;
+		vector<Hitbox*> generalHitbox;
 
 		for (auto x : j["generalHitbox"])
 		{
@@ -163,7 +176,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 
 		//printf("hitbox middle\n");
-		vector<Hitbox> preciseHitbox;
+		vector<Hitbox*> preciseHitbox;
 		for (auto x : j["preciseHitbox"])
 		{
 			//printf("hitbox forloop\n");
