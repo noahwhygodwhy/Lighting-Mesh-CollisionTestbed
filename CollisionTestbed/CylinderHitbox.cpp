@@ -9,3 +9,11 @@ CylinderHitbox::CylinderHitbox(vec3 origin, float radius, float height, HitboxTy
 CylinderHitbox::~CylinderHitbox()
 {
 }
+vec3 CylinderHitbox::getMaxs()
+{
+	return vec3(origin.x + radius, origin.y+height, origin.z + radius);
+}
+vec3 CylinderHitbox::getMins()
+{
+	return vec3(origin.x - radius, origin.y, origin.z - radius);
+}

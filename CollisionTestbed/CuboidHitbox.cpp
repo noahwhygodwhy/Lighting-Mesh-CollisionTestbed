@@ -10,3 +10,11 @@ CuboidHitbox::~CuboidHitbox()
 {
 
 }
+vec3 CuboidHitbox::getMaxs()
+{
+	return glm::max(origin, otherCorner);
+}
+vec3 CuboidHitbox::getMins()
+{
+	return glm::min(origin, otherCorner);
+}

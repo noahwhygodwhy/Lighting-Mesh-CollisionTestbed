@@ -14,11 +14,20 @@ Hitbox::Hitbox()
 }
 
 vec3 Hitbox::getMaxs()
-{
+{	
+	if (this->type == HitboxType::CUBOID)
+		return ((CuboidHitbox*)this)->getMaxs();
+	if (this->type == HitboxType::CYLINDER)
+		return ((CylinderHitbox*)this)->getMaxs();
+
 	return this->origin;
 }
 vec3 Hitbox::getMins()
 {
+	if (this->type == HitboxType::CUBOID)
+		return ((CuboidHitbox*)this)->getMins();
+	if (this->type == HitboxType::CYLINDER)
+		return ((CylinderHitbox*)this)->getMins();
 	return this->origin;
 }
 

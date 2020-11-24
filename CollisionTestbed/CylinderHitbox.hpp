@@ -14,6 +14,8 @@ public:
 	~CylinderHitbox();
 	float height;
 	float radius;
+	vec3 getMaxs();
+	vec3 getMins();
 private:
 
 };

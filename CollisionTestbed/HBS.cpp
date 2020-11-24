@@ -27,16 +27,16 @@ void handleHits(vector<IThing*> things, IThing* specificThing)
 	//definetly optimize better later^tm
 	vec3 dump;
 
-	vec3 maxs = ((Thing*)specificThing)->getMaxs();//TODO:
-	vec3 mins = ((Thing*)specificThing)->getMins();
+	vec3 maxs = ((Thing*)specificThing)->maxs;//TODO:
+	vec3 mins = ((Thing*)specificThing)->mins;
 
 	vector<IThing*> generalAreaThings;
 
 	//create a list of general area things
 	for (int i = 0; i < things.size(); i++)
 	{
-		vec3 thingmaxs = ((Thing*)things.at(i))->getMaxs();
-		vec3 thingmins = ((Thing*)things.at(i))->getMins();
+		vec3 thingmaxs = ((Thing*)things.at(i))->maxs;
+		vec3 thingmins = ((Thing*)things.at(i))->mins;
 		if (generalArea(maxs, mins, thingmaxs, thingmins))
 		{
 			generalAreaThings.push_back(things.at(i));
@@ -104,16 +104,16 @@ float getDistance(float x1, float y1, float x2, float y2)
 
 }
 
-bool cuboidAndCylinder(CuboidHitbox hb1, CylinderHitbox hb2, vec3* correction)
+bool cuboidAndCylinder(CuboidHitbox* hb1, CylinderHitbox* hb2, vec3* correction)
 {
-	vec3 circleCenter = hb2.origin;
+	vec3 circleCenter = hb2->origin;
 	
-	if (getDistance(hb1.origin.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
-		getDistance(hb1.otherCorner.x, hb1.origin.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
-		getDistance(hb1.origin.x, hb1.otherCorner.z, hb2.origin.x, hb2.origin.z) < hb2.radius ||
-		getDistance(hb1.otherCorner.x, hb1.otherCorner.z, hb2.origin.x, hb2.origin.z) < hb2.radius)
+	if (getDistance(hb1->origin.x, hb1->origin.z, hb2->origin.x, hb2->origin.z) < hb2->radius ||
+		getDistance(hb1->otherCorner.x, hb1->origin.z, hb2->origin.x, hb2->origin.z) < hb2->radius ||
+		getDistance(hb1->origin.x, hb1->otherCorner.z, hb2->origin.x, hb2->origin.z) < hb2->radius ||
+		getDistance(hb1->otherCorner.x, hb1->otherCorner.z, hb2->origin.x, hb2->origin.z) < hb2->radius)
 	{
-		if (hb1.otherCorner.y < hb2.origin.y || hb1.origin.y >(hb2.origin.y + hb2.height))
+		if (hb1->otherCorner.y < hb2->origin.y || hb1->origin.y >(hb2->origin.y + hb2->height))
 		{
 			return false;
 		}
@@ -129,21 +129,21 @@ bool cuboidAndCylinder(CuboidHitbox hb1, CylinderHitbox hb2, vec3* correction)
 	return false;
 }
 
-bool cuboidAndCuboid(CuboidHitbox hb1, CuboidHitbox hb2, vec3* correction)
+bool cuboidAndCuboid(CuboidHitbox* hb1, CuboidHitbox* hb2, vec3* correction)
 {
-	if (hb1.otherCorner.x < hb2.origin.x) return false;
-	if (hb1.origin.x > hb2.otherCorner.x) return false;
-	if (hb1.otherCorner.y < hb2.origin.y) return false;
-	if (hb1.origin.y > hb2.otherCorner.y) return false;
-	if (hb1.otherCorner.z < hb2.origin.z) return false;
-	if (hb1.origin.z > hb2.otherCorner.z) return false;
+	if (hb1->otherCorner.x < hb2->origin.x) return false;
+	if (hb1->origin.x > hb2->otherCorner.x) return false;
+	if (hb1->otherCorner.y < hb2->origin.y) return false;
+	if (hb1->origin.y > hb2->otherCorner.y) return false;
+	if (hb1->otherCorner.z < hb2->origin.z) return false;
+	if (hb1->origin.z > hb2->otherCorner.z) return false;
 	//TODO: need to calculate correction
 	return true;
 }
 
-bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
+bool coliding(Hitbox* hb1, Hitbox* hb2, vec3* correction)
 {
-	int hbt = (int) hb1.type & (int) hb2.type;
+	int hbt = (int) hb1->type & (int) hb2->type;
 
 	if (hbt & (int)HitboxType::CUBOID)
 	{
@@ -153,9 +153,9 @@ bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
 		}
 		if (hbt & (int)HitboxType::CYLINDER)
 		{
-			if ((int)hb1.type & (int)HitboxType::CUBOID)
-				return cuboidAndCylinder(*(CuboidHitbox*)&hb1, *(CylinderHitbox*)&hb2, correction);
-			return cuboidAndCylinder(*(CuboidHitbox*)&hb2, *(CylinderHitbox*)&hb1, correction);
+			if ((int)hb1->type & (int)HitboxType::CUBOID)
+				return cuboidAndCylinder((CuboidHitbox*)hb1, (CylinderHitbox*)hb2, correction);
+			return cuboidAndCylinder((CuboidHitbox*)hb2, (CylinderHitbox*)hb1, correction);
 				
 		}
 		if (hbt & (int)HitboxType::PLLLPP)
@@ -164,7 +164,7 @@ bool coliding(Hitbox hb1, Hitbox hb2, vec3* correction)
 		}
 		else //both cuboids
 		{
-			return cuboidAndCuboid(*(CuboidHitbox*)&hb1, *(CuboidHitbox*)&hb2, correction);
+			return cuboidAndCuboid((CuboidHitbox*)hb1, (CuboidHitbox*)hb2, correction);
 		}
 	}
 	return false;

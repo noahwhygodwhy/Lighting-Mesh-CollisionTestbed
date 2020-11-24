@@ -3,7 +3,7 @@
 	"model": "player2.obj",
 	"positionOffset": {
 		"x": 0.0,
-		"y": 0.0,
+		"y": 3.0,
 		"z": 0.0
 	},
 	"camera": {
