@@ -25,7 +25,11 @@ Thing::Thing(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*> generalHitb
 	this->transform = mat4(1.0f);
 	this->preciseHitbox = preciseHitbox;
 	this->generalHitbox = generalHitbox;
-	calculateExtremes(preciseHitbox, &this->maxs, &this->mins);
+	for (Hitbox* hb : this->preciseHitbox)
+	{
+		maxs = glm::max(maxs, hb->getMaxs());
+		mins = glm::min(mins, hb->getMins());
+	}
 	this->transform = glm::translate(this->transform, position);
 	this->transform = glm::rotate(this->transform, radians(orientation.x), vec3(1, 0, 0));
 	this->transform = glm::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
@@ -34,15 +38,6 @@ Thing::Thing(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*> generalHitb
 	this->type = type;
 }
 
-
-void calculateExtremes(vector<Hitbox*> hbs, vec3* maxs, vec3* mins)
-{
-	for (Hitbox* hb : hbs)
-	{
-		*maxs = glm::max(*maxs, hb->getMaxs());
-		*maxs = glm::min(*maxs, hb->getMins());
-	}
-}
 
 vec3 Thing::getUp()
 {

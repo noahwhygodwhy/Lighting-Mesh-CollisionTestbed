@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 #include "Camera.hpp"
 #include "glm/gtx/string_cast.hpp"
+#include "HBS.hpp"
 
 
 float deltaTime = 0.0f;	// Time between current frame and last frame
@@ -140,6 +141,7 @@ void Renderer::run()
 		{
 			t->draw(shader); //the order of these two infuriates me, but it doesn't work
 			t->tick(deltaTime, this->window); //the other way around :|
+			handleHits(things, t);
 		}
 
 		mat4 view = this->player->getView();
