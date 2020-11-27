@@ -57,9 +57,6 @@
     <ClCompile Include="Thing.cpp">
       <Filter>Source Files\Things</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Things</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\OGLS</Filter>
     </ClCompile>

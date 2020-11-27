@@ -10,26 +10,19 @@ using namespace glm;
 
 //static int asdfasdf = 0;
 
-Camera::Camera(vec3 initPos, vec3 initUp, float yaw, float pitch, float mvspd, float mouseSens, float zooooooom)
+Camera::Camera(vec3 initPos, vec3 worldUp, float yaw, float pitch, float mvspd, float mouseSens, float zooooooom)
 {
-	//printf("init pos: %f, %f, %f\n", initPos.x, initPos.y, initPos.z);
 	this->transform = mat4(1.0f);
 	this->transform = glm::translate(this->transform, initPos);
-	//printf("init p:%s\n", glm::to_string(this->transform).c_str());
-	this->transform[1] = vec4(initUp, this->transform[1][3]);
-	//printf("created camera\n");
-	//cout << glm::to_string(this->transform) << endl;
+	this->worldUp = worldUp;
+	//this->transform[1] = vec4(initUp, this->transform[1][3]);
+
 	yaw = yaw;
 	pitch = pitch;
 	movementSpeed = mvspd;
 	mouseSensitivity = mouseSens;
 	zoom = zooooooom;
-	//updateVectors();
-	//printf("init p:%s\n", glm::to_string(this->transform).c_str());
-	//this->id = asdfasdf++;
-	//printf("id: %i\n", this->id);
-	//printf("updated camera\n");
-	//cout << glm::to_string(this->transform) << endl;
+	updateVectors();
 }
 Camera::Camera()
 {
@@ -62,7 +55,7 @@ void Camera::updateVectors()
 	f.y = sin(radians(pitch));
 	f.z = sin(radians(yaw)) * cos(radians(pitch));
 	front = normalize(f);
-	right = normalize(cross(front, vec3(0, 1, 0)));
+	right = normalize(cross(front, worldUp));
 	up = normalize(cross(right, front));
 	this->transform[0] = vec4(right, transform[0][3]);
 	this->transform[1] = vec4(up, transform[1][3]);

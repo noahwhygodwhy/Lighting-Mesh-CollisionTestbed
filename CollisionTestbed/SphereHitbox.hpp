@@ -10,7 +10,7 @@ using namespace glm;
 class SphereHitbox : public Hitbox
 {
 public:
-	SphereHitbox(vec3 origin, float radius, float height, HitboxType type = HitboxType::SPHERE);
+	SphereHitbox(vec3 origin, float radius, HitboxType type = HitboxType::SPHERE);
 	~SphereHitbox();
 	float radius;
 	vec3 getMaxs();

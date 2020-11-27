@@ -34,8 +34,10 @@ Thing::Thing(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*> generalHitb
 	this->transform = glm::rotate(this->transform, radians(orientation.x), vec3(1, 0, 0));
 	this->transform = glm::rotate(this->transform, radians(orientation.y), vec3(0, 1, 0));
 	this->transform = glm::rotate(this->transform, radians(orientation.z), vec3(0, 0, 1));
+	printf("%s\n", glm::to_string(this->transform).c_str());
 	this->velocity = velocity;
 	this->type = type;
+	this->mass = 1.0f;
 }
 
 
@@ -186,6 +188,7 @@ Thing* jsonToThing(string thingTitle)
 
 		//TODO: later attributes might include weight, speed, interactability
 
+		printf("type is %s\n", type.c_str());
 		if (type == "agent")
 		{
 			vec3 cameraOffset = jsonToVec3(j["camera"]["cameraOffset"]);
@@ -214,6 +217,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 		else if (type == "object")
 		{
+			printf("making object\n");
 			return new Object(model, preciseHitbox, generalHitbox, positionOffset);
 			//if it's an object, just make it
 		}

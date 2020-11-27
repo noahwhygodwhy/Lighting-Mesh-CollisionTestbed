@@ -1,6 +1,7 @@
 #include "Hitbox.hpp"
 #include "CylinderHitbox.hpp"
 #include "CuboidHitbox.hpp"
+#include "SphereHitbox.hpp"
 Hitbox::Hitbox(vec3 origin, HitboxType type)
 {
 	this->type = type;
@@ -19,6 +20,8 @@ vec3 Hitbox::getMaxs()
 		return ((CuboidHitbox*)this)->getMaxs();
 	if (this->type == HitboxType::CYLINDER)
 		return ((CylinderHitbox*)this)->getMaxs();
+	if (this->type == HitboxType::SPHERE)
+		return ((SphereHitbox*)this)->getMaxs();
 
 	return this->origin;
 }
@@ -28,6 +31,8 @@ vec3 Hitbox::getMins()
 		return ((CuboidHitbox*)this)->getMins();
 	if (this->type == HitboxType::CYLINDER)
 		return ((CylinderHitbox*)this)->getMins();
+	if (this->type == HitboxType::SPHERE)
+		return ((SphereHitbox*)this)->getMins();
 	return this->origin;
 }
 

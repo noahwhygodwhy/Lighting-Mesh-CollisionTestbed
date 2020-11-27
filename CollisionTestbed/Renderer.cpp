@@ -19,7 +19,7 @@ Renderer::Renderer(int x, int y)
 	screenX = x;
 	screenY = y;
 	window = glfwCreateWindow(x, y, "Title Goes here", NULL, NULL);
-	cam = Camera(vec3(0, 3, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
+	cam = Camera(vec3(0, 1, 0), vec3(0, 1, 0), 0, 0, 10, 1, 1);
 }
 
 Renderer::~Renderer()
@@ -140,11 +140,22 @@ void Renderer::run()
 		for (auto t : things) //Everything else
 		{
 			t->draw(shader); //the order of these two infuriates me, but it doesn't work
-			t->tick(deltaTime, this->window); //the other way around :|
-			handleHits(things, t);
+			//printf("%s\n", glm::to_string(((Thing*)t)->transform).c_str());
+			//	t->tick(deltaTime, this->window); //the other way around :|
+			//handleHits(things, t);
 		}
 
-		mat4 view = this->cam.getView(mat4(1.0));
+		//mat4 view = this->cam.getView(mat4(1.0));
+
+
+
+
+		const float radius = 5.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
+		mat4 view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+
+
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));
 		shader.setMatFour("view", view);
 		mat4 projection = perspective(radians(70.0f), (float)screenX / (float)screenY, 0.1f, 256.0f);

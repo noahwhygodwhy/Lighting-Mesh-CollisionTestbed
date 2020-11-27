@@ -74,7 +74,7 @@ public:
 	vec3 velocity;
 	vec3 spinAxis;
 	float spinRate;
-	int weight;//? idk how to calculate that but i'll figure it out.
+	int mass;//? idk how to calculate that but i'll figure it out.
 
 	vector<Hitbox*> preciseHitbox;
 	vector<Hitbox*> generalHitbox;

@@ -1,6 +1,6 @@
 #include "SphereHitbox.hpp"
 
-SphereHitbox::SphereHitbox(vec3 origin, float radius, float height, HitboxType type) : Hitbox(origin, type)
+SphereHitbox::SphereHitbox(vec3 origin, float radius, HitboxType type) : Hitbox(origin, type)
 {
 	this->radius = radius;
 }
