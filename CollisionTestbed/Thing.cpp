@@ -177,6 +177,10 @@ Thing* jsonToThing(string thingTitle)
 			//printf("hitbox forloop\n");
 			preciseHitbox.push_back(jsonToHitbox(x));
 		}
+		if (generalHitbox.empty())
+		{
+			generalHitbox = preciseHitbox; //TODO: inefficient as it still evals twice, can be done better
+		}
 		//printf("ending hitbox\n");
 
 
@@ -210,6 +214,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 		else if (type == "object")
 		{
+			return new Object(model, preciseHitbox, generalHitbox, positionOffset);
 			//if it's an object, just make it
 		}
 		else if (type == "environment")

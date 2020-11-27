@@ -56,6 +56,12 @@ Hitbox* jsonToHitbox(json j)
 		vec3 otherCorner = origin + dims;
 		return new CuboidHitbox(origin, otherCorner);
 	}
+	if (type == "sphere")
+	{
+		vec3 origin = jsonToVec3(j["origin"]);
+		float radius = j["radius"];
+		return new SphereHitbox(origin, radius);
+	}
 
 	return new Hitbox();
 	//TODO: ANY OTHER TYPE...i wish c++ supported reflection

@@ -167,6 +167,7 @@
     <ClCompile Include="CuboidHitbox.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SphereHitbox.cpp" />
     <ClCompile Include="Thing.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="CuboidHitbox.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="SphereHitbox.hpp" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Thing.hpp" />
   </ItemGroup>

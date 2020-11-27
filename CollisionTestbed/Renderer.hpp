@@ -33,6 +33,7 @@ private:
 	GLFWwindow* window;
 	unsigned int VBO, VAO, EBO;
 	int32_t layerCount;
+	Camera cam;
 };
 
 
