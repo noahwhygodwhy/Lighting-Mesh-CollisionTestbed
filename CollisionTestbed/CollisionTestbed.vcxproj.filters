@@ -116,9 +116,6 @@
     <ClInclude Include="Environment.hpp">
       <Filter>Header Files\Things</Filter>
     </ClInclude>
-    <ClInclude Include="Object.hpp">
-      <Filter>Header Files\Things</Filter>
-    </ClInclude>
     <ClInclude Include="Thing.hpp">
       <Filter>Header Files\Things</Filter>
     </ClInclude>

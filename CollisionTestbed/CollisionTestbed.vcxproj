@@ -183,7 +183,6 @@
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
-    <ClInclude Include="Object.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerController.hpp" />
     <ClInclude Include="CuboidHitbox.hpp" />

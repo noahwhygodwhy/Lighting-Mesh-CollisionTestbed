@@ -1,7 +1,6 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include "Object.hpp"
 #include "Thing.hpp"
 
 class Environment : public Thing

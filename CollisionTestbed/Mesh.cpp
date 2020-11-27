@@ -100,8 +100,8 @@ void Mesh::draw(Shader& shader, glm::mat4 transform)
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
 
-    shader.setBool("hitbox", true);
-    glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, 0);
+    //shader.setBool("hitbox", true);
+    //glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, 0);
 
     glBindVertexArray(0);
 

@@ -140,6 +140,8 @@ void Renderer::run()
 		for (auto t : things) //Everything else
 		{
 			t->draw(shader); //the order of these two infuriates me, but it doesn't work
+			t->gravityTick(deltaTime, window);
+			t->tick(deltaTime, window);
 			//printf("%s\n", glm::to_string(((Thing*)t)->transform).c_str());
 			//	t->tick(deltaTime, this->window); //the other way around :|
 			//handleHits(things, t);
@@ -153,7 +155,12 @@ void Renderer::run()
 		const float radius = 5.0f;
 		float camX = sin(glfwGetTime()) * radius;
 		float camZ = cos(glfwGetTime()) * radius;
-		mat4 view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+		camZ = 50;
+		camX = 50;
+		float camY = -200;
+		vec3 obloc = vec3(((Thing*)things.at(0))->transform[3]);
+		mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), obloc, glm::vec3(0.0, 1.0, 0.0));
+		//mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 
 
 		//mat4 view = lookAt(vec3(32 + sin(glfwGetTime()/10)*20, 85, 32+cos(glfwGetTime()/10)*20), vec3(32, 60, 32), vec3(0.0f, 1.0f, 0.0f));

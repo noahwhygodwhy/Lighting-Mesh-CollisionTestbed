@@ -1,5 +1,5 @@
 {
-	"type": "object",
+	"type": "thing",
 	"model": "ball1.obj",
 	"positionOffset": {
 		"x": 0.0,

@@ -11,7 +11,6 @@
 #include "Agent.hpp"
 #include "Player.hpp"
 #include "Environment.hpp"
-#include "Object.hpp"
 #
 
 
@@ -72,11 +71,14 @@ Thing::~Thing()
 
 }
 
-
+void Thing::gravityTick(float deltaTime, GLFWwindow* window)
+{
+	this->velocity += vec3(0, GRAVITY_CONTSANT, 0)*deltaTime;
+}
 
 void Thing::tick(float deltaTime, GLFWwindow* window)
 {
-	//move the object according to time
+	this->transform = glm::translate(this->transform, this->velocity*deltaTime);
 }
 
 void Thing::draw(Shader shader)
@@ -215,10 +217,10 @@ Thing* jsonToThing(string thingTitle)
 			Player* p = new Player(model, new PlayerController(), preciseHitbox, generalHitbox, c, cameraOffset, cameraVector, gunportOffset, gunportVector, positionOffset);
 			return p;
 		}
-		else if (type == "object")
+		else if (type == "thing")
 		{
-			printf("making object\n");
-			return new Object(model, preciseHitbox, generalHitbox, positionOffset);
+			printf("making thing\n");
+			return new Thing(model, preciseHitbox, generalHitbox, positionOffset);
 			//if it's an object, just make it
 		}
 		else if (type == "environment")

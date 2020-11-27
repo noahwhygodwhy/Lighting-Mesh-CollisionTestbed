@@ -13,11 +13,13 @@ using namespace std;
 using namespace glm;
 
 
+static float GRAVITY_CONTSANT = -9.8f;
 
 class IThing
 {
 public:
 	virtual void tick(float deltaTime, GLFWwindow* window) = 0;
+	virtual void gravityTick(float deltaTime, GLFWwindow* window) = 0;
 	virtual void draw(Shader shader) = 0;
 };
 
@@ -51,7 +53,7 @@ public:
 	~Thing();
 
 
-
+	void gravityTick(float deltaTime, GLFWwindow* window);
 	void tick(float deltaTime, GLFWwindow* window);
 	void draw(Shader shader);
 

@@ -6,7 +6,6 @@
 #include "Controller.hpp"
 #include "PlayerController.hpp"
 #include "Environment.hpp"
-#include "Object.hpp"
 #include <iostream>
 #include <fstream>
 #include "glm/gtx/string_cast.hpp"
@@ -40,7 +39,7 @@ int main(void)
 	//Player* p = (Player*) jsonToThing("player2");
 	//Agent* a = (Agent*)jsonToThing("agent1");
 	//Environment* e = (Environment*)jsonToThing("environment1");
-	Object* b = (Object*)jsonToThing("ball1");
+	Thing* b = (Thing*)jsonToThing("ball1");
 
 	//todo:
 
