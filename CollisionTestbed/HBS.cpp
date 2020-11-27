@@ -182,6 +182,7 @@ void handleHits(vector<IThing*> things, IThing* specificThing)
 			{
 				if (coliding(hb1, hb2, vec3(((Thing*)mtThing)->transform[3]), vec3(((Thing*)specificThing)->transform[3]), &byHowMuch))
 				{
+					((Thing*)specificThing)->collided();
 					printf("%i THEY'RE COLLIDING\n", tasdf++);
 					//TODO:make the correction
 					shouldBreak = true;
