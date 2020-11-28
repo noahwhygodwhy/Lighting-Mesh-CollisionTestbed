@@ -2,7 +2,7 @@
 
 #include "CuboidHitbox.hpp"
 #include "CylinderHitbox.hpp"
-
+#include "SphereHitbox.hpp"
 
 
 bool generalArea(vec3 t1pos, vec3 t2pos, vec3 origMax, vec3 origMin, vec3 otherMax, vec3 otherMin)
@@ -70,12 +70,28 @@ bool cuboidAndCuboid(CuboidHitbox* hb1, CuboidHitbox* hb2, vec3 t1pos, vec3 t2po
 	return true;
 }
 
+bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, vec3 t1pos, vec3 t2pos, vec3* correction)
+{
+	//TODO:
+}
+bool sphereAndSphere(SphereHitbox* hb1, SphereHitbox* hb2, vec3 t1pos, vec3 t2pos, vec3* correction)
+{
+	 
+}
+
 bool coliding(Hitbox* hb1, Hitbox* hb2, vec3 t1pos, vec3 t2pos, vec3* correction)
 {
 	int hbt = (int)hb1->type & (int)hb2->type;
 
 	if (hbt & (int)HitboxType::CUBOID)
 	{
+		if (hbt & (int)HitboxType::SPHERE)
+		{
+			if ((int)hb1->type & (int)HitboxType::CUBOID)
+				return cuboidAndSphere((CuboidHitbox*)hb1, (SphereHitbox*)hb2, t1pos, t2pos, correction);
+			return cuboidAndSphere((CuboidHitbox*)hb2, (SphereHitbox*)hb1, t2pos, t1pos, correction);
+
+		}
 		if (hbt & (int)HitboxType::PLAIN)
 		{
 
