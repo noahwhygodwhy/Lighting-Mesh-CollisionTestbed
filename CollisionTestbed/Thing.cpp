@@ -121,10 +121,15 @@ void Thing::rotateSet(vec3 rotation)
 {
 
 }
+
+void Thing::setVelocity(vec3 direction, float speed)
+{
+	this->velocity = glm::normalize(direction) * speed;
+}
 //TODO: END
 
 static unordered_map<std::string, Model> loadedModels; //TODO: might need to be a model pointer, not a model
-Thing* jsonToThing(string thingTitle)
+Thing* jsonToThing(string thingTitle, vec3 positionOffset)
 {
 
 	string path = thingTitle + "/" + thingTitle + ".json";
@@ -162,7 +167,7 @@ Thing* jsonToThing(string thingTitle)
 		}
 
 
-		vec3 positionOffset = jsonToVec3(j["positionOffset"]);
+		positionOffset += jsonToVec3(j["positionOffset"]);
 
 
 		//printf("starting hitboxes\n");
@@ -226,7 +231,7 @@ Thing* jsonToThing(string thingTitle)
 		else if (type == "environment")
 		{
 			//printf("returning environment\n");
-			return new Environment(model, preciseHitbox, generalHitbox);
+			return new Environment(model, preciseHitbox, generalHitbox, positionOffset);
 		}
 		return new Thing();
 	}

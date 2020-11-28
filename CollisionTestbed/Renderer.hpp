@@ -22,6 +22,7 @@ public:
 	void run();
 	void addThing(Thing* th);
 	void setPlayer(Player* p);
+	void processInput(GLFWwindow* window);
 private:
 	Player* player;
 	vector<IThing*> things;
@@ -34,6 +35,7 @@ private:
 	unsigned int VBO, VAO, EBO;
 	int32_t layerCount;
 	Camera cam;
+
 };
 
 

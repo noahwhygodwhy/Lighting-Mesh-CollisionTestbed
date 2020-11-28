@@ -32,13 +32,10 @@ int main(void)
 	//string Agent1Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/survival backpack/backpack.obj";
 	//string Agent2Path = "C:/Users/noahm/source/repos/CollisionTestbed/CollisionTestbed/Agent1/agent1.obj";
 
-	ofstream myFile("theweirdfilenameIcameupwith");
-	myFile << "THE FILE CONTESNTS";
-	myFile.close();
 	//Player* p = dynamic_cast<Player*>(jsonToThing("player1"));
 	//Player* p = (Player*) jsonToThing("player2");
 	//Agent* a = (Agent*)jsonToThing("agent1");
-	//Environment* e = (Environment*)jsonToThing("environment1");
+	Environment* e = (Environment*)jsonToThing("environment2");
 	Thing* b = (Thing*)jsonToThing("ball1");
 
 	//todo:
@@ -47,7 +44,7 @@ int main(void)
 	//modify jsonTohitbox to accept objFile hitboxes
 	//implement a objFile hitbox...
 
-	//r.addThing(e);
+	r.addThing(e);
 	r.addThing(b);
 	//r.addThing(a);
 	printf("###running\n");

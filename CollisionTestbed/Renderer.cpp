@@ -2,12 +2,16 @@
 #include "Camera.hpp"
 #include "glm/gtx/string_cast.hpp"
 #include "HBS.hpp"
+#include "Thing.hpp"
+
 
 
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
 
 
+static vec3 camVector = vec3();
+static vec3 camPos = vec3();
 //TODO: you were moving the camera from the renderer to the Player
 
 Renderer::Renderer(int x, int y)
@@ -27,11 +31,18 @@ Renderer::~Renderer()
 }
 
 
-void processInput(GLFWwindow* window)
+void Renderer::processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		Thing* newBall = jsonToThing("ball1", camPos);
+		newBall->setVelocity(camVector, 10);
+		this->addThing(newBall);
+
 	}
 }
 
@@ -142,6 +153,7 @@ void Renderer::run()
 			t->draw(shader); //the order of these two infuriates me, but it doesn't work
 			t->gravityTick(deltaTime, window);
 			t->tick(deltaTime, window);
+			handleHits(things, t);
 			//printf("%s\n", glm::to_string(((Thing*)t)->transform).c_str());
 			//	t->tick(deltaTime, this->window); //the other way around :|
 			//handleHits(things, t);
@@ -152,14 +164,20 @@ void Renderer::run()
 
 
 
-		const float radius = 5.0f;
+		const float radius = 20.0f;
 		float camX = sin(glfwGetTime()) * radius;
 		float camZ = cos(glfwGetTime()) * radius;
-		camZ = 50;
-		camX = 50;
-		float camY = -200;
+		camX = 0;
+		camZ = 10;
+		//camZ = 10;
+		//camX = 10;
+		float camY = -2;
 		vec3 obloc = vec3(((Thing*)things.at(0))->transform[3]);
 		mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), obloc, glm::vec3(0.0, 1.0, 0.0));
+
+
+		camPos = vec3(camX, camY, camZ);
+		camVector = glm::normalize(obloc - camPos);
 		//mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 
 

@@ -58,7 +58,7 @@ public:
 	void draw(Shader shader);
 
 	
-
+	void setVelocity(vec3 direction, float speed);
 	void impartForce(vec3 direction, float magnitude);
 	void impartSpin(vec3 axis, float magnitude);
 	void moveRelative(vec3 shift);
@@ -87,6 +87,6 @@ public:
 private:
 	Model model;
 };
-Thing* jsonToThing(string path);
+Thing* jsonToThing(string path, vec3 positionOffset = vec3(0));
 
 #endif

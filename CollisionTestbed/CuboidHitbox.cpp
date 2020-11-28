@@ -1,8 +1,10 @@
 #include "CuboidHitbox.hpp"
 
 
-CuboidHitbox::CuboidHitbox(vec3 origin, vec3 otherCorner, HitboxType type) : Hitbox(origin, type)
+CuboidHitbox::CuboidHitbox(vec3 origin, vec3 otherCorner, HitboxType type) : Hitbox(glm::max(origin, otherCorner), type)
 {
+	this->otherCorner = glm::max(origin, otherCorner);
+
 	this->otherCorner = otherCorner;
 }
 

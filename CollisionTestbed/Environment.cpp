@@ -8,3 +8,10 @@ Environment::Environment(Model m, vector<Hitbox*> preciseHitbox, vector<Hitbox*>
 Environment::~Environment()
 {
 }
+
+void Environment::tick(float deltaTime, GLFWwindow* window)
+{
+}
+void Environment::gravityTick(float deltaTime, GLFWwindow* window)
+{
+}
