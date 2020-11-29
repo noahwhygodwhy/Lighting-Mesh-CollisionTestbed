@@ -130,7 +130,11 @@ static radiusChecker ops[][3] = {
 
 bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
-	vec3 originals[] = { hb1->origin, hb1->otherCorner };
+	vec3 a = hb1->origin; //min corner
+	vec3 b = hb1->otherCorner; //max corner
+	vec3 mid = (a + b) / vec3(2.0f);
+	vec3 c = hb2->origin; //c for circle
+	float r = hb2->radius;
 
 	/*vec3 nnn = hb1->origin;
 	vec3 ppp = hb1->otherCorner;
@@ -141,6 +145,16 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 	vec3 ppn = vec3(ppp.x, ppp.y, nnn.z);
 	vec3 ppp = vec3(ppp.x, ppp.y, ppp.z);*/
 
+	bool x = c.x + r > a.x && c.x - r < b.x;
+	bool y = c.y + r > a.y && c.y - r < b.y;
+	bool z = c.z + r > a.z && c.z - r < b.z;
+	bool posx;
+	bool negx;
+	bool posy;
+	bool negy;
+	bool posz;
+	bool negz;
+	
 
 
 
