@@ -48,54 +48,152 @@ float getDistance(float x1, float y1, float x2, float y2)
 
 }
 
-bool cuboidAndCylinder(CuboidHitbox* hb1, CylinderHitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
+bool cuboidAndCylinder(CuboidHitbox* hb1, CylinderHitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
+	bool toReturn = false;
 	vec3 circleCenter = hb2->origin;
+	vec3 t1pos = vec3(t1->transform[3]);
+	vec3 t2pos = vec3(t2->transform[3]);
 
 	if (getDistance(hb1->origin.x + t1pos.x, hb1->origin.z + t1pos.z, hb2->origin.x + t2pos.x, hb2->origin.z + t2pos.z) < hb2->radius ||
 		getDistance(hb1->otherCorner.x + t1pos.x, hb1->origin.z + t1pos.z, hb2->origin.x + t2pos.x, hb2->origin.z + t2pos.z) < hb2->radius ||
 		getDistance(hb1->origin.x + t1pos.x, hb1->otherCorner.z + t1pos.z, hb2->origin.x + t2pos.x, hb2->origin.z + t2pos.z) < hb2->radius ||
 		getDistance(hb1->otherCorner.x + t1pos.x, hb1->otherCorner.z + t1pos.z, hb2->origin.x + t2pos.x, hb2->origin.z + t2pos.z) < hb2->radius)
 	{
-		if (hb1->otherCorner.y + t1pos.y < hb2->origin.y + t2pos.y || hb1->origin.y + t1pos.y >(hb2->origin.y + t2pos.y + hb2->height))
+		if (!(hb1->otherCorner.y + t1pos.y < hb2->origin.y + t2pos.y || hb1->origin.y + t1pos.y >(hb2->origin.y + t2pos.y + hb2->height)))
 		{
-			return false;
-		}
-		else
-		{
+			if (correct)
+			{
+				//TODO: do correction here
+			}
 			return true;
-			//it's colliding, by how much, that's for you to find out
 		}
-		//we know x/z is in, now just check y;
 	}
-
-
 	return false;
 }
 
-bool cuboidAndCuboid(CuboidHitbox* hb1, CuboidHitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
+bool cuboidAndCuboid(CuboidHitbox* hb1, CuboidHitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
 
+	vec3 t1pos = vec3(t1->transform[3]);
+	vec3 t2pos = vec3(t2->transform[3]);
 	if (hb1->otherCorner.x+t1pos.x < hb2->origin.x + t2pos.x) return false;
 	if (hb1->origin.x + t1pos.x > hb2->otherCorner.x + t2pos.x) return false;
 	if (hb1->otherCorner.y + t1pos.y < hb2->origin.y + t2pos.y) return false;
 	if (hb1->origin.y + t1pos.y > hb2->otherCorner.y + t2pos.y) return false;
 	if (hb1->otherCorner.z + t1pos.z < hb2->origin.z + t2pos.z) return false;
 	if (hb1->origin.z + t1pos.z > hb2->otherCorner.z + t2pos.z) return false;
-	//TODO: need to calculate correction
+	if (correct)
+	{
+		//TODO: do correction here
+	}
 	return true;
 }
 
-bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
+
+vector<vec3> getEightCorners(vec3 a, vec3 b)
 {
-	
-}
-bool sphereAndSphere(SphereHitbox* hb1, SphereHitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
-{
-	 
+	vec3 originals[] = { a, b };
+	vector<vec3> corners;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				corners.push_back(vec3(originals[i].x, originals[i].y, originals[i].z));
+			}
+		}
+	}
 }
 
-bool coliding(Hitbox* hb1, Hitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
+typedef bool (*radiusChecker)(float a, float b, float r);
+
+bool gt(float a, float b, float r)
+{
+	return a + r > b;
+}
+bool lt(float a, float b, float r)
+{
+	return a-r < b;
+}
+static radiusChecker ops[][3] = {
+	{gt, gt, gt},
+	{gt, gt, lt},
+	{gt, lt, gt},
+	{gt, lt, lt},
+	{lt, gt, gt},
+	{lt, gt, lt},
+	{lt, lt, gt},
+	{lt, lt, lt},
+};
+
+bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2, bool correct)
+{
+	vec3 originals[] = { hb1->origin, hb1->otherCorner };
+
+	/*vec3 nnn = hb1->origin;
+	vec3 ppp = hb1->otherCorner;
+	vec3 nnp = vec3(nnn.x, nnn.y, ppp.z);
+	vec3 npn = vec3(nnn.x, ppp.y, nnn.z);
+	vec3 pnn = vec3(ppp.x, nnn.y, nnn.z);
+	vec3 pnp = vec3(ppp.x, nnn.y, ppp.z);
+	vec3 ppn = vec3(ppp.x, ppp.y, nnn.z);
+	vec3 ppp = vec3(ppp.x, ppp.y, ppp.z);*/
+
+
+
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				vec3 corner = vec3(originals[i].x, originals[k].y, originals[j].z);
+				if (ops[i + k + j][0](hb2->origin.x, originals[i].x, hb2->radius))
+				{
+				}
+				if (ops[i + k + j][1](hb2->origin.y, originals[i].y, hb2->radius))
+				{
+				}
+				if (ops[i + k + j][2](hb2->origin.z, originals[i].z, hb2->radius))
+				{
+
+				}
+			}
+		}
+	}
+
+
+	if (correct)
+	{
+		//TODO: do correction here
+	}
+	return true;
+}
+
+
+
+
+
+bool sphereAndSphere(SphereHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2, bool correct)
+{
+
+	vec3 t1pos = vec3(t1->transform[3]);
+	vec3 t2pos = vec3(t2->transform[3]);
+	if (getDistance(t1pos, t2pos) > hb1->radius + hb2->radius)
+	{
+		return false;
+	}
+	if (correct)
+	{
+		//TODO: do correction here
+	}
+	return true;
+}
+
+bool coliding(Hitbox* hb1, Hitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
 	int hbt = (int)hb1->type & (int)hb2->type;
 
@@ -104,8 +202,8 @@ bool coliding(Hitbox* hb1, Hitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
 		if (hbt & (int)HitboxType::SPHERE)
 		{
 			if ((int)hb1->type & (int)HitboxType::CUBOID)
-				return cuboidAndSphere((CuboidHitbox*)hb1, (SphereHitbox*)hb2, t1pos, t2pos, correct);
-			return cuboidAndSphere((CuboidHitbox*)hb2, (SphereHitbox*)hb1, t2pos, t1pos, correct);
+				return cuboidAndSphere((CuboidHitbox*)hb1, (SphereHitbox*)hb2, t1, t2, correct);
+			return cuboidAndSphere((CuboidHitbox*)hb2, (SphereHitbox*)hb1, t2, t1, correct);
 
 		}
 		if (hbt & (int)HitboxType::PLAIN)
@@ -115,8 +213,8 @@ bool coliding(Hitbox* hb1, Hitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
 		if (hbt & (int)HitboxType::CYLINDER)
 		{
 			if ((int)hb1->type & (int)HitboxType::CUBOID)
-				return cuboidAndCylinder((CuboidHitbox*)hb1, (CylinderHitbox*)hb2, t1pos, t2pos, correct);
-			return cuboidAndCylinder((CuboidHitbox*)hb2, (CylinderHitbox*)hb1,t2pos, t1pos, correct);
+				return cuboidAndCylinder((CuboidHitbox*)hb1, (CylinderHitbox*)hb2, t1, t2, correct);
+			return cuboidAndCylinder((CuboidHitbox*)hb2, (CylinderHitbox*)hb1, t2, t1, correct);
 
 		}
 		if (hbt & (int)HitboxType::PLLLPP)
@@ -125,12 +223,12 @@ bool coliding(Hitbox* hb1, Hitbox* hb2, vec3 t1pos, vec3 t2pos, bool correct)
 		}
 		else //both cuboids
 		{
-			return cuboidAndCuboid((CuboidHitbox*)hb1, (CuboidHitbox*)hb2, t1pos, t2pos, correct);
+			return cuboidAndCuboid((CuboidHitbox*)hb1, (CuboidHitbox*)hb2, t1, t2, correct);
 		}
 	}
 	if (hbt & (int)HitboxType::SPHERE)
 	{
-		return sphereAndSphere((SphereHitbox*) hb1, (SphereHitbox*) hb2, t2pos, t2pos, correct);
+		return sphereAndSphere((SphereHitbox*) hb1, (SphereHitbox*) hb2, t1, t2, correct);
 	}
 	return false;
 	//TODO: eventually this will have to include how to handle all of the types of hitboxes. Is there a better way of doing this besides each pairs?
@@ -183,7 +281,7 @@ vector<IThing*> broad(vector<IThing*> things, IThing* specificThing)
 			}
 			for (auto hb2 : ((Thing*)specificThing)->generalHitbox) //for each hitbox in the second thing
 			{
-				if (coliding(hb1, hb2, vec3(((Thing*)things.at(i))->transform[3]), vec3(((Thing*)specificThing)->transform[3]), false))
+				if (coliding(hb1, hb2, (Thing*)things.at(i), (Thing*)specificThing, false))
 				{
 					maybeTouching.push_back(things.at(i));
 					shouldBreak = true;
@@ -207,7 +305,7 @@ bool narrow(vector<IThing*> things, IThing* specificThing)
 		{
 			for (auto hb2 : ((Thing*)specificThing)->generalHitbox) //for each hitbox in the second thing
 			{
-				if (coliding(hb1, hb2, vec3(((Thing*)mtThing)->transform[3]), vec3(((Thing*)specificThing)->transform[3]), true))
+				if (coliding(hb1, hb2, (Thing*)mtThing, (Thing*)specificThing, true))
 				{
 					printf("%i THEY'RE COLLIDING\n", tasdf++);
 					//TODO:make the correction
