@@ -78,6 +78,7 @@ void Thing::gravityTick(float deltaTime, GLFWwindow* window)
 
 void Thing::tick(float deltaTime, GLFWwindow* window)
 {
+	this->pTransform = this->transform;
 	this->transform = glm::translate(this->transform, this->velocity*deltaTime);
 }
 

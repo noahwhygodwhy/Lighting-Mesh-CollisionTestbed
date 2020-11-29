@@ -73,6 +73,7 @@ public:
 
 	ThingType type;
 	mat4 transform;
+	mat4 pTransform;
 	vec3 velocity;
 	vec3 spinAxis;
 	float spinRate;

@@ -117,7 +117,7 @@ bool lt(float a, float b, float r)
 {
 	return a-r < b;
 }
-static radiusChecker ops[][3] = {
+/*static radiusChecker ops[][3] = {
 	{gt, gt, gt},
 	{gt, gt, lt},
 	{gt, lt, gt},
@@ -126,14 +126,20 @@ static radiusChecker ops[][3] = {
 	{lt, gt, lt},
 	{lt, lt, gt},
 	{lt, lt, lt},
-};
+};*/
 
 bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
-	vec3 a = hb1->origin; //min corner
-	vec3 b = hb1->otherCorner; //max corner
+	vec3 currCubPos = vec3(t1->transform[3]);
+	vec3 prevCubPos = vec3(t1->pTransform[3]);
+	vec3 currSphPos = vec3(t2->transform[3]);
+	vec3 prevSphPos = vec3(t2->pTransform[3]);
+
+
+	vec3 a = hb1->origin+currCubPos; //min corner
+	vec3 b = hb1->otherCorner + currCubPos; //max corner
 	vec3 mid = (a + b) / vec3(2.0f);
-	vec3 c = hb2->origin; //c for circle
+	vec3 c = hb2->origin + currSphPos; //c for circle
 	float r = hb2->radius;
 
 
@@ -160,34 +166,44 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 			bool yface = ychk(c.y, quadsCorner.y, 0);
 			bool zface = zchk(c.z, quadsCorner.z, 0);
 
+			vec3 deflectionPlaneNormal;
+
 			if (xface && yface && zface)
 			{
 				//it hit the corner
+				deflectionPlaneNormal = (prevSphPos + hb2->origin) - quadsCorner;
 			}
 			else if (xface && yface)
 			{
 				//it hit the x/y edge
+				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner)*vec3(1, 1, 0);
+
 			}
 			else if (yface && zface)
 			{
 				//it hit the y/z edge
+				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner) * vec3(0, 1, 1);
 			}
 			else if (xface && zface)
 			{
-				//it hit the x/z edge
+				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner) * vec3(1, 0, 1);
 			}
 			else if (xface)
 			{
 				//it hit the x face
+				deflectionPlaneNormal = vec3(posx ? 1 : -1, 0, 0);
 			}
 			else if (yface)
 			{
 				//it hit the y face
+				deflectionPlaneNormal = vec3(0, posy ? 1 : -1, 0);
 			}
 			else if (zface)
 			{
 				//it hit the z face
+				deflectionPlaneNormal = vec3(0, 0, posz ? 1 : -1);
 			}
+			deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);
 
 			//TODO: do correction here
 		}
