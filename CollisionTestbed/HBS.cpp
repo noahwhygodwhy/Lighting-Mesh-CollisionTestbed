@@ -136,55 +136,64 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 	vec3 c = hb2->origin; //c for circle
 	float r = hb2->radius;
 
-	/*vec3 nnn = hb1->origin;
-	vec3 ppp = hb1->otherCorner;
-	vec3 nnp = vec3(nnn.x, nnn.y, ppp.z);
-	vec3 npn = vec3(nnn.x, ppp.y, nnn.z);
-	vec3 pnn = vec3(ppp.x, nnn.y, nnn.z);
-	vec3 pnp = vec3(ppp.x, nnn.y, ppp.z);
-	vec3 ppn = vec3(ppp.x, ppp.y, nnn.z);
-	vec3 ppp = vec3(ppp.x, ppp.y, ppp.z);*/
 
 	bool x = c.x + r > a.x && c.x - r < b.x;
 	bool y = c.y + r > a.y && c.y - r < b.y;
 	bool z = c.z + r > a.z && c.z - r < b.z;
-	bool posx;
-	bool negx;
-	bool posy;
-	bool negy;
-	bool posz;
-	bool negz;
-	
+	bool colliding = x && y && z;
 
-
-
-	for (int i = 0; i < 2; i++)
+	if (colliding)
 	{
-		for (int k = 0; k < 2; k++)
+		if (correct)
 		{
-			for (int j = 0; j < 2; j++)
+			bool posx = c.x > mid.x;
+			bool posy = c.y > mid.y;
+			bool posz = c.z > mid.z;
+
+			radiusChecker xchk = posx ? lt : gt;
+			radiusChecker ychk = posy ? lt : gt;
+			radiusChecker zchk = posz ? lt : gt;
+
+			vec3 quadsCorner = vec3(posx ? b.x : a.x, posy ? b.y : a.y, posz ? b.z : a.z);
+
+			bool xface = xchk(c.x, quadsCorner.x, 0);
+			bool yface = ychk(c.y, quadsCorner.y, 0);
+			bool zface = zchk(c.z, quadsCorner.z, 0);
+
+			if (xface && yface && zface)
 			{
-				vec3 corner = vec3(originals[i].x, originals[k].y, originals[j].z);
-				if (ops[i + k + j][0](hb2->origin.x, originals[i].x, hb2->radius))
-				{
-				}
-				if (ops[i + k + j][1](hb2->origin.y, originals[i].y, hb2->radius))
-				{
-				}
-				if (ops[i + k + j][2](hb2->origin.z, originals[i].z, hb2->radius))
-				{
-
-				}
+				//it hit the corner
 			}
+			else if (xface && yface)
+			{
+				//it hit the x/y edge
+			}
+			else if (yface && zface)
+			{
+				//it hit the y/z edge
+			}
+			else if (xface && zface)
+			{
+				//it hit the x/z edge
+			}
+			else if (xface)
+			{
+				//it hit the x face
+			}
+			else if (yface)
+			{
+				//it hit the y face
+			}
+			else if (zface)
+			{
+				//it hit the z face
+			}
+
+			//TODO: do correction here
 		}
+		return true;
 	}
-
-
-	if (correct)
-	{
-		//TODO: do correction here
-	}
-	return true;
+	return false;
 }
 
 
