@@ -130,16 +130,15 @@ bool lt(float a, float b, float r)
 
 bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2, bool correct)
 {
-	vec3 currCubPos = vec3(t1->transform[3]);
+	/*vec3 currCubPos = vec3(t1->transform[3]);
 	vec3 prevCubPos = vec3(t1->pTransform[3]);
 	vec3 currSphPos = vec3(t2->transform[3]);
-	vec3 prevSphPos = vec3(t2->pTransform[3]);
+	vec3 prevSphPos = vec3(t2->pTransform[3]);*/
 
 
-	vec3 a = hb1->origin+currCubPos; //min corner
-	vec3 b = hb1->otherCorner + currCubPos; //max corner
-	vec3 mid = (a + b) / vec3(2.0f);
-	vec3 c = hb2->origin + currSphPos; //c for circle
+	vec3 a = hb1->origin+ vec3(t1->transform[3]); //min corner
+	vec3 b = hb1->otherCorner + vec3(t1->transform[3]); //max corner
+	vec3 c = hb2->origin + vec3(t2->transform[3]); //c for circle
 	float r = hb2->radius;
 
 
@@ -152,6 +151,8 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 	{
 		if (correct)
 		{
+			vec3 mid = (a + b) / vec3(2.0f);
+
 			bool posx = c.x > mid.x;
 			bool posy = c.y > mid.y;
 			bool posz = c.z > mid.z;
@@ -168,7 +169,15 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 
 			vec3 deflectionPlaneNormal;
 
-			if (xface && yface && zface)
+			deflectionPlaneNormal = glm::normalize((vec3(t2->pTransform[3]) + hb2->origin) - quadsCorner) * vec3(xface ? 1 : 0, yface ? 1 : 0, zface ? 1 : 0);
+
+
+
+
+
+
+			//DO NOT ERASE YET, TRUST ME FUTURE NOAH
+			/*if (xface && yface && zface)
 			{
 				//it hit the corner
 				deflectionPlaneNormal = (prevSphPos + hb2->origin) - quadsCorner;
@@ -177,7 +186,6 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 			{
 				//it hit the x/y edge
 				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner)*vec3(1, 1, 0);
-
 			}
 			else if (yface && zface)
 			{
@@ -186,6 +194,7 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 			}
 			else if (xface && zface)
 			{
+				//it hit the x/z edge
 				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner) * vec3(1, 0, 1);
 			}
 			else if (xface)
@@ -203,7 +212,7 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 				//it hit the z face
 				deflectionPlaneNormal = vec3(0, 0, posz ? 1 : -1);
 			}
-			deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);
+			deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);*/
 
 			//TODO: do correction here
 		}
