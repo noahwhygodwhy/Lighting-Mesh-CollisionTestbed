@@ -171,48 +171,45 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 
 			deflectionPlaneNormal = glm::normalize((vec3(t2->pTransform[3]) + hb2->origin) - quadsCorner) * vec3(xface ? 1 : 0, yface ? 1 : 0, zface ? 1 : 0);
 
+			//this is the point to ray trace from to the cuboid, in the direction of the vector of the velocity of the sphere
+			vec3 pointOfImpactOnSphere = r * glm::normalize(vec3(
+				c.x - ((posx && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0), 
+				c.y - ((posy && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0),
+				c.z - ((posz && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0)));
 
 
 
-
-
+			/*
 			//DO NOT ERASE YET, TRUST ME FUTURE NOAH
-			/*if (xface && yface && zface)
+			if (xface && yface && zface)
 			{
 				//it hit the corner
-				deflectionPlaneNormal = (prevSphPos + hb2->origin) - quadsCorner;
 			}
 			else if (xface && yface)
 			{
 				//it hit the x/y edge
-				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner)*vec3(1, 1, 0);
 			}
 			else if (yface && zface)
 			{
 				//it hit the y/z edge
-				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner) * vec3(0, 1, 1);
 			}
 			else if (xface && zface)
 			{
 				//it hit the x/z edge
-				deflectionPlaneNormal = ((prevSphPos + hb2->origin) - quadsCorner) * vec3(1, 0, 1);
 			}
 			else if (xface)
 			{
 				//it hit the x face
-				deflectionPlaneNormal = vec3(posx ? 1 : -1, 0, 0);
 			}
 			else if (yface)
 			{
 				//it hit the y face
-				deflectionPlaneNormal = vec3(0, posy ? 1 : -1, 0);
 			}
 			else if (zface)
 			{
 				//it hit the z face
-				deflectionPlaneNormal = vec3(0, 0, posz ? 1 : -1);
-			}
-			deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);*/
+			}*/
+			/*deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);*/
 
 			//TODO: do correction here
 		}
