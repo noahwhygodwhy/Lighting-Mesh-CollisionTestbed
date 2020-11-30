@@ -172,24 +172,31 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 			deflectionPlaneNormal = glm::normalize((vec3(t2->pTransform[3]) + hb2->origin) - quadsCorner) * vec3(xface ? 1 : 0, yface ? 1 : 0, zface ? 1 : 0);
 
 			//this is the point to ray trace from to the cuboid, in the direction of the vector of the velocity of the sphere
-			vec3 pointOfImpactOnSphere = r * glm::normalize(vec3(
+			/*vec3 pointOfImpactOnSphere = r * glm::normalize(vec3(
 				c.x - ((posx && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0), 
 				c.y - ((posy && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0),
-				c.z - ((posz && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0)));
+				c.z - ((posz && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0)));*/
+			vec3 pointOfImpactOnSphere;
 			vec3 pointOfImpactOnCuboid;
+
+			//TODO: because this is axis alligned, it will be easier, just take another look at it.
+
+
 
 
 			
 			//DO NOT ERASE YET, TRUST ME FUTURE NOAH
 			if (xface && yface && zface)
 			{
-				//it hit the corner
 				pointOfImpactOnCuboid = quadsCorner;
+				//it hit the corner
+				pointOfImpactOnSphere = c+(r * glm::normalize(c - quadsCorner));
 			}
 			else if (xface && yface)
 			{
 				vec3 pointA = vec3(quadsCorner.x, quadsCorner.y, a.z);
 				vec3 pointB = vec3(quadsCorner.x, quadsCorner.y, b.z);
+				pointOfImpactOnCuboid = vec3(quadsCorner.x, quadsCorner.y, c.z);
 				//it hit the x/y edge
 			}
 			else if (yface && zface)
