@@ -176,17 +176,20 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 				c.x - ((posx && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0), 
 				c.y - ((posy && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0),
 				c.z - ((posz && !xface) ? 1 : 0) + ((!posx && !xface) ? 1 : 0)));
+			vec3 pointOfImpactOnCuboid;
 
 
-
-			/*
+			
 			//DO NOT ERASE YET, TRUST ME FUTURE NOAH
 			if (xface && yface && zface)
 			{
 				//it hit the corner
+				pointOfImpactOnCuboid = quadsCorner;
 			}
 			else if (xface && yface)
 			{
+				vec3 pointA = vec3(quadsCorner.x, quadsCorner.y, a.z);
+				vec3 pointB = vec3(quadsCorner.x, quadsCorner.y, b.z);
 				//it hit the x/y edge
 			}
 			else if (yface && zface)
@@ -208,7 +211,7 @@ bool cuboidAndSphere(CuboidHitbox* hb1, SphereHitbox* hb2, Thing* t1, Thing* t2,
 			else if (zface)
 			{
 				//it hit the z face
-			}*/
+			}/**/
 			/*deflectionPlaneNormal = glm::normalize(deflectionPlaneNormal);*/
 
 			//TODO: do correction here
