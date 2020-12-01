@@ -190,3 +190,13 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	}
 	return Mesh(vertices, indices, textures);
 }
+
+vector<vector<Vertex>*> Model::getVectors()
+{
+	vector<vector<Vertex>*> toReturn;
+	for (Mesh m : this->meshes)
+	{
+		toReturn.push_back(m.getVertices());
+	}
+	return toReturn;
+}

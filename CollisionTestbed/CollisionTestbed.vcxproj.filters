@@ -102,6 +102,9 @@
     <ClCompile Include="SphereHitbox.cpp">
       <Filter>Source Files\Hitboxes</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.hpp">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="SphereHitbox.hpp">
       <Filter>Header Files\Hitboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

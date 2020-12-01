@@ -105,5 +105,11 @@ void Mesh::draw(Shader& shader, glm::mat4 transform)
 
     glBindVertexArray(0);
 
+
     //glActiveTexture(GL_TEXTURE0);
+}
+
+vector<Vertex>* Mesh::getVertices()
+{
+    return &this->vertices;
 }

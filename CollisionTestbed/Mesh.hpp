@@ -38,6 +38,7 @@ public:
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
 	vector<Texture> textures;
+	vector<Vertex>* getVertices();
 private:
 	unsigned int VAO, VBO, EBO;
 

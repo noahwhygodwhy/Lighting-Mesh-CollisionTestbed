@@ -148,12 +148,17 @@ void Renderer::run()
 		processInput(this->window);
 		shader.use();
 
+		/*for (auto l : lights)
+		{
+
+		}*/
+
 		for (auto t : things) //Everything else
 		{
 			t->draw(shader); //the order of these two infuriates me, but it doesn't work
-			t->gravityTick(deltaTime, window);
-			t->tick(deltaTime, window);
-			handleHits(things, t);
+			//t->gravityTick(deltaTime, window);
+			//t->tick(deltaTime, window);
+			//handleHits(things, t);
 			//printf("%s\n", glm::to_string(((Thing*)t)->transform).c_str());
 			//	t->tick(deltaTime, this->window); //the other way around :|
 			//handleHits(things, t);
@@ -173,7 +178,7 @@ void Renderer::run()
 		//camX = 10;
 		float camY = -2;
 		vec3 obloc = vec3(((Thing*)things.at(0))->transform[3]);
-		mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), obloc, glm::vec3(0.0, 1.0, 0.0));
+		mat4 view = glm::lookAt(glm::vec3(camX, camY, camZ), vec3(0), glm::vec3(0.0, 1.0, 0.0));
 
 
 		camPos = vec3(camX, camY, camZ);
